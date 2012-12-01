@@ -1,12 +1,15 @@
 //
 //  UTAppDelegate.m
-//  MiniTip
+//  UltraTip
 //
-//  Created by IFAN CHU on 11/26/12.
+//  Created by IFAN CHU on 11/23/12.
 //  Copyright (c) 2012 IFAN CHU. All rights reserved.
 //
 
 #import "UTAppDelegate.h"
+
+#import "UTViewController.h"
+#import "MTMainViewController.h"
 
 @implementation UTAppDelegate
 
@@ -14,7 +17,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    MTMainViewController *mainController = [[MTMainViewController alloc] initWithNibName:@"MTMainViewController" bundle:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainController];
+//    self.centerController = [[UTViewController alloc] initWithNibName:@"UTViewController" bundle:nil];
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     return YES;
 }
