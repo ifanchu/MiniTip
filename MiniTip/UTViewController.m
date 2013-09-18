@@ -7,6 +7,7 @@
 //
 
 #import "UTViewController.h"
+#import "ICFormatControl.h"
 
 @interface UTViewController ()
 
@@ -29,8 +30,10 @@
     [self.view addGestureRecognizer:swipeRight];
     [self.view addGestureRecognizer:tap];
     // UI Setting
-    [[self billAmountTextField] setClearsOnBeginEditing:YES];
-    [[self taxAmountTextField] setClearsOnBeginEditing:YES];
+//    [[self billAmountTextField] setClearsOnBeginEditing:YES];
+//    [[self taxAmountTextField] setClearsOnBeginEditing:YES];
+    [ICFormatControl formatUITextField:[self billAmountTextField]];
+    [ICFormatControl formatUITextField:[self taxAmountTextField]];
     [self calculate];
 }
 
@@ -116,22 +119,10 @@
     [[self splitAmountLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fSplit]];
 }
 
-
-// For formatting UITextField
-- (void)decorateUITextField:(UITextField *)textField
-{
-    
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    text = [text stringByReplacingOccurrencesOfString:@"." withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"$" withString:@""];
-    double number = [text intValue] * 0.01;
-    textField.text = [NSString stringWithFormat:@"%@%.2lf", @"$", number];
-    return NO;
+    return [ICFormatControl textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
 }
 
 @end
