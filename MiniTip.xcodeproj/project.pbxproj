@@ -116,7 +116,8 @@
 		055E8A0517E9FBFE009EA946 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */,
+				0563330F17EA1DBF004FB317 /* images */,
+				0563331017EA1DC9004FB317 /* Fonts */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -128,6 +129,25 @@
 				051D8A0C17EA0470004273EE /* ICFormatControl.m */,
 			);
 			name = CustomControls;
+			sourceTree = "<group>";
+		};
+		0563330F17EA1DBF004FB317 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				058D116016644D5F00C003C3 /* Default.png */,
+				058D116216644D5F00C003C3 /* Default@2x.png */,
+				058D116416644D5F00C003C3 /* Default-568h@2x.png */,
+			);
+			name = images;
+			path = MiniTip;
+			sourceTree = "<group>";
+		};
+		0563331017EA1DC9004FB317 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		056936D61667470900091D92 /* View */ = {
@@ -207,9 +227,6 @@
 				058D115716644D5F00C003C3 /* InfoPlist.strings */,
 				058D115A16644D5F00C003C3 /* main.m */,
 				058D115C16644D5F00C003C3 /* MiniTip-Prefix.pch */,
-				058D116016644D5F00C003C3 /* Default.png */,
-				058D116216644D5F00C003C3 /* Default@2x.png */,
-				058D116416644D5F00C003C3 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
