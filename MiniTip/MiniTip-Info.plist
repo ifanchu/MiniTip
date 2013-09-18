@@ -43,5 +43,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>UIAppsFonts</key>
+    <array>
+        <string>Lato-Lig.ttf</string>
+    </array>
 </dict>
 </plist>

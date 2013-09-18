@@ -30,7 +30,7 @@
 - (IBAction)easySplitModeChanged:(id)sender;
 
 - (void)calculate;
-
+- (void)decorateUITextField:(UITextField *)textField;
 // TextField Delegate
 
 @end

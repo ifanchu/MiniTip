@@ -23,6 +23,6 @@
 - (IBAction)addPersonalEntry:(id)sender;
 - (IBAction)addSharedEntry:(id)sender;
 - (IBAction)tipSliderChanged:(id)sender;
-
+// Update the grand total label
 - (void)updateGrandTotal;
 @end

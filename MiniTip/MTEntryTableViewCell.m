@@ -42,6 +42,10 @@
     }
 }
 
-
+- (IBAction)moveFirstResponder:(id)sender{
+    [[self entryForName] becomeFirstResponder];
+    if ([self isSharedEntry])
+        [[self entryAmountInDollar] resignFirstResponder];
+}
 
 @end

@@ -19,6 +19,7 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
     if (!defaultStore) {
         defaultStore = [[super allocWithZone:nil] init];
     }
+    NSLog(@"%@", defaultStore);
     return defaultStore;
 }
 
@@ -31,20 +32,25 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
 {
     [entries removeAllObjects];
     [sharedEntries removeAllObjects];
+    for (int i=0; i < NUMBER_OF_INVISIBLE_CELL; i++) {
+        [entries addObject:[MTEntryItem getInvisibleEntry]];
+    }
 }
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        if (!entries)
+        if (!entries){
             entries = [[NSMutableArray alloc] init];
-        if(!sharedEntries){
-            sharedEntries = [[NSMutableArray alloc] init];
             for (int i=0; i < NUMBER_OF_INVISIBLE_CELL; i++) {
+                // add 10 invisible entries to entries array
+                // this is to implement the scrolling feature
                 [entries addObject:[MTEntryItem getInvisibleEntry]];
             }
         }
+        if(!sharedEntries)
+            sharedEntries = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -81,8 +87,8 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
 - (MTEntryItem *)createPersonalEntry
 {
     MTEntryItem *p = [MTEntryItem getEmptyPersonalEntry];
-    
-    [entries addObject:p];
+    int insertLoc = [entries count] - NUMBER_OF_INVISIBLE_CELL;
+    [entries insertObject:p atIndex:insertLoc];
     
     return p;
 }
@@ -90,17 +96,12 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
 - (MTEntryItem *)createSharedEntry
 {
     MTEntryItem *p = [MTEntryItem getEmptySharedEntry];
-    [entries addObject:p];
     [sharedEntries addObject:p];
+    int insertLoc = [entries count] - NUMBER_OF_INVISIBLE_CELL;
+    [entries insertObject:p atIndex:insertLoc];
     
     return p;
 }
-
-//- (void)calculate
-//{
-//    MTResultItemStore *store = [MTResultItemStore defaultStore];
-//
-//}
 
 - (NSArray *)getSharedEntries
 {
@@ -140,7 +141,11 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
     }
     return [set count];
 }
-
+/*
+ Determine whether the Calculate button should be enabled or not.
+ There should be at least 1 personal entry with name given to 
+ be able to be calculated.
+ */
 - (BOOL)isAbleToCalculate
 {
     if ([entries count] == 0)
@@ -161,4 +166,8 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
     return [self sumOfAllSharedEntries]/[self sumOfPeople];
 }
 
+- (NSString *)description
+{
+    return [entries description];
+}
 @end

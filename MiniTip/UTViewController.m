@@ -18,6 +18,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UINavigationItem *p = [self navigationItem];
+    [p setTitle:@"Tip Calculation"];
 	// Do any additional setup after loading the view, typically from a nib.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft)];
@@ -85,7 +87,7 @@
 
 - (void)calculate
 {
-    double bill = [[[self billAmountTextField] text] doubleValue];
+    double bill = [[[[self billAmountTextField] text] stringByReplacingOccurrencesOfString:@"$" withString:@"" ] doubleValue];
     double tax = [[[self taxAmountTextField] text] doubleValue];
     int selectedEasySplitMode = [[self easySplitSegmentedControl] selectedSegmentIndex];
     
@@ -112,6 +114,24 @@
     [[self totalTipLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fTip]];
     [[self grandTotalLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fGrand]];
     [[self splitAmountLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fSplit]];
+}
+
+
+// For formatting UITextField
+- (void)decorateUITextField:(UITextField *)textField
+{
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    text = [text stringByReplacingOccurrencesOfString:@"." withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"$" withString:@""];
+    double number = [text intValue] * 0.01;
+    textField.text = [NSString stringWithFormat:@"%@%.2lf", @"$", number];
+    return NO;
 }
 
 @end

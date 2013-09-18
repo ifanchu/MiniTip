@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		055E8A0417E9FBF7009EA946 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */; };
+		055E8A0817E9FDBC009EA946 /* ICDecimalTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 055E8A0717E9FDBC009EA946 /* ICDecimalTextField.m */; };
 		056936D116673F7D00091D92 /* MTAdvancedModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056936CF16673F7D00091D92 /* MTAdvancedModeViewController.m */; };
 		056936D216673F7D00091D92 /* MTAdvancedModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 056936D016673F7D00091D92 /* MTAdvancedModeViewController.xib */; };
 		056936D51667470100091D92 /* MTEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 056936D41667470100091D92 /* MTEntryTableViewCell.m */; };
@@ -42,6 +44,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
+		055E8A0617E9FDBC009EA946 /* ICDecimalTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICDecimalTextField.h; path = MiniTip/ICDecimalTextField.h; sourceTree = "<group>"; };
+		055E8A0717E9FDBC009EA946 /* ICDecimalTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ICDecimalTextField.m; path = MiniTip/ICDecimalTextField.m; sourceTree = "<group>"; };
 		056936CE16673F7D00091D92 /* MTAdvancedModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAdvancedModeViewController.h; sourceTree = "<group>"; };
 		056936CF16673F7D00091D92 /* MTAdvancedModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTAdvancedModeViewController.m; sourceTree = "<group>"; };
 		056936D016673F7D00091D92 /* MTAdvancedModeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTAdvancedModeViewController.xib; sourceTree = "<group>"; };
@@ -108,6 +113,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		055E8A0517E9FBFE009EA946 /* CustomFonts */ = {
+			isa = PBXGroup;
+			children = (
+				055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */,
+			);
+			name = CustomFonts;
+			sourceTree = "<group>";
+		};
+		055E8A0917E9FDCF009EA946 /* CustomControls */ = {
+			isa = PBXGroup;
+			children = (
+				055E8A0617E9FDBC009EA946 /* ICDecimalTextField.h */,
+				055E8A0717E9FDBC009EA946 /* ICDecimalTextField.m */,
+			);
+			name = CustomControls;
+			sourceTree = "<group>";
+		};
 		056936D61667470900091D92 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +159,8 @@
 		058D113F16644D5F00C003C3 = {
 			isa = PBXGroup;
 			children = (
+				055E8A0917E9FDCF009EA946 /* CustomControls */,
+				055E8A0517E9FBFE009EA946 /* CustomFonts */,
 				056936ED1667541300091D92 /* Model */,
 				058D117716644DD200C003C3 /* imgs */,
 				056936D61667470900091D92 /* View */,
@@ -297,6 +321,7 @@
 				056936E016674BF600091D92 /* 31-circle-plus.png in Resources */,
 				056936F216687A2900091D92 /* MTResultsViewController.xib in Resources */,
 				056936F716687A9C00091D92 /* MTDetailsViewController.xib in Resources */,
+				055E8A0417E9FBF7009EA946 /* Lato-Lig.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +344,7 @@
 				056936EC1667540E00091D92 /* MTResultItemStore.m in Sources */,
 				056936F116687A2900091D92 /* MTResultsViewController.m in Sources */,
 				056936F616687A9C00091D92 /* MTDetailsViewController.m in Sources */,
+				055E8A0817E9FDBC009EA946 /* ICDecimalTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

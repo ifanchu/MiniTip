@@ -101,7 +101,9 @@
 //    MTEntryItemStore *store = [MTEntryItemStore defaultStore];
     [[self entryTableView] reloadData];
     [self shouldBtnCalculateEnabled];
-    MTEntryTableViewCell *cell = [[[self entryTableView] visibleCells] objectAtIndex:[[[self entryTableView] visibleCells] count]-1];
+    int idx = [[[MTEntryItemStore defaultStore] allEntries] count] - 10 - 1;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+    MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryAmountInDollar] becomeFirstResponder];
 }
 
@@ -112,7 +114,9 @@
     [[MTEntryItemStore defaultStore] createSharedEntry];
     [[self entryTableView] reloadData];
     [self shouldBtnCalculateEnabled];
-    MTEntryTableViewCell *cell = [[[self entryTableView] visibleCells] objectAtIndex:[[[self entryTableView] visibleCells] count]-1];
+    int idx = [[[MTEntryItemStore defaultStore] allEntries] count] - 10 - 1;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+    MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryAmountInDollar] becomeFirstResponder];
 }
 - (void)viewDidLoad
@@ -123,6 +127,9 @@
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap)];
     [doubleTap setNumberOfTapsRequired:2];
     [self.view addGestureRecognizer:doubleTap];
+    
+    UINavigationItem *p = [self navigationItem];
+    [p setTitle:@"Entry Input"];
     
     // Load Custom cell nib file
     UINib *nib = [UINib nibWithNibName:@"MTEntryTableViewCell" bundle:nil];
@@ -139,43 +146,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // Keyboard obscure issue resolution
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardDidShowNotification object:nil];
-    
-    [super viewWillAppear:animated];
     [[self entryTableView] reloadData];
-}
-
-//- (void)keyboardWasShown:(NSNotification *)notification
-//{
-//    NSDictionary* info = [notification userInfo];
-//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//
-//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(300.0f, 0.0f, kbSize.height, 0.0f);
-//    self.entryTableView.contentInset = contentInsets;
-//    self.entryTableView.scrollIndicatorInsets = contentInsets;
-//    
-//    [self.entryTableView scrollRectToVisible:self.entryTableView.frame animated:YES];
-//    CGRect bounds = [[self entryTableView] bounds];
-//    [[self entryTableView] setBounds:CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, 100.0f)];
-//}
-
-//- (void)keyboardWillBeHidden:(NSNotification *)notification
-//{
-////    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-////    self.entryTableView.contentInset = contentInsets;
-////    self.entryTableView.scrollIndicatorInsets = contentInsets;
-//    CGRect bounds = [[self entryTableView] bounds];
-//    [[self entryTableView] setBounds:CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, 220.0f)];
-//}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -207,6 +178,7 @@
 {
     // Get an item from EntryItemStore
     NSLog(@"MTAdvancedView cellForRowAtIndexPath");
+    NSLog(@"%@", [[MTEntryItemStore defaultStore] description]);
     MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
     // Get a new or recycled cell
     MTEntryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MTEntryTableViewCell"];
@@ -220,7 +192,14 @@
     if (p.isInvisible) {
         [[cell entryAmountInDollar] setHidden:YES];
         [[cell entryForName] setHidden:YES];
+        [[cell dollarLabel] setHidden:YES];
+        [[cell centerButton] setHidden:YES];
 //        [[cell imageView] setHidden:YES];
+    }else{
+        [[cell entryAmountInDollar] setHidden:NO];
+        [[cell entryForName] setHidden:NO];
+        [[cell dollarLabel] setHidden:NO];
+        [[cell centerButton] setHidden:NO];
     }
 
     return cell;
@@ -235,11 +214,6 @@
 {
     return 1;
 }
-
-//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-//{
-//    [[MTEntryItemStore defaultStore] moveEntryAtIndex:[sourceIndexPath row] toIndex:[destinationIndexPath row]];
-//}
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -297,25 +271,18 @@
     [self updateGrandTotal];
     NSLog(@"%@", [MTEntryItemStore description]);
     
-    self.entryTableView.frame= CGRectMake(self.entryTableView.frame.origin.x, self.entryTableView.frame.origin.y, self.entryTableView.frame.size.width, 220.0f);
+    [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     NSLog(@"textFieldDidBeginEditing tag: %d", textField.tag);
-    //
-//    CGPoint point = [textField.superview convertPoint:textField.frame.origin toView:[self entryTableView]];
-//    CGPoint contentOffset = [[self entryTableView] contentOffset];
-//    contentOffset.y += (point.y - self.navigationController.navigationBar.frame.size.height); // Adjust this value as you need
-//    [[self entryTableView] setContentOffset:contentOffset animated:YES];
-    
-    // Move entryTableView up to accomodate the keyboard
-    
+
     
     // get textField's cell's index path
-//    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:(MTEntryTableViewCell *)[[textField superview] superview]];
-//    
-//    [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:(MTEntryTableViewCell *)[[textField superview] superview]];
+    
+    [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)updateGrandTotal
@@ -328,18 +295,12 @@
     [[self grandTotalLabel] setText:[NSString stringWithFormat:@"Grand Total: $%.2f", grandTotal]];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-//    self.entryTableView.frame= CGRectMake(self.entryTableView.frame.origin.x, self.entryTableView.frame.origin.y, self.entryTableView.frame.size.width, 70.0f);
-//    NSIndexPath *indexPath =[NSIndexPath indexPathForRow:nIndex inSection:nSectionIndex];
-    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:(MTEntryTableViewCell *)[[textField superview] superview]];
-    [self.entryTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    return YES;
-}
-
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 //{
-//    self.entryTableView.frame= CGRectMake(self.entryTableView.frame.origin.x, self.entryTableView.frame.origin.y, self.entryTableView.frame.size.width, 220.0f);
+////    self.entryTableView.frame= CGRectMake(self.entryTableView.frame.origin.x, self.entryTableView.frame.origin.y, self.entryTableView.frame.size.width, 70.0f);
+////    NSIndexPath *indexPath =[NSIndexPath indexPathForRow:nIndex inSection:nSectionIndex];
+//    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:(MTEntryTableViewCell *)[[textField superview] superview]];
+//    [self.entryTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 //    return YES;
 //}
 

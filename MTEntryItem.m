@@ -53,6 +53,9 @@
     
     [desc appendFormat:@" costs %@", entryAmountInDollar];
     
+    if([self isInvisible])
+        [desc appendString:@", is invisible."];
+    
     return desc;
 }
 

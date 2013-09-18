@@ -36,7 +36,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
+    UINavigationItem *p = [self navigationItem];
+    [p setTitle:@"Results"];
 }
 
 - (void)didReceiveMemoryWarning

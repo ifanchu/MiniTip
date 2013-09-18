@@ -17,7 +17,11 @@
 @property (nonatomic) BOOL isSharedEntry;
 // This idInArray indicates the cell's location in the array
 // so that we can save it back to array
-@property (nonatomic) int idInArray;
+//@property (nonatomic) int idInArray;
+@property (strong, nonatomic) IBOutlet UILabel *dollarLabel;
+@property (strong, nonatomic) IBOutlet UIButton *centerButton;
+
+- (IBAction)moveFirstResponder:(id)sender;
 
 + (MTEntryTableViewCell *)getEmptyPersonalEntryCell;
 + (MTEntryTableViewCell *)getEmptySharedEntryCell;
