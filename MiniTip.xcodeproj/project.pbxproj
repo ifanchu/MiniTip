@@ -20,6 +20,8 @@
 		0516D85E17EAE8C4006052FF /* AppIcon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D85C17EAE8C4006052FF /* AppIcon57x57.png */; };
 		0516D85F17EAE8C4006052FF /* AppIcon57x57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D85D17EAE8C4006052FF /* AppIcon57x57@2x.png */; };
 		0516D86117EAEA04006052FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D86017EAEA04006052FF /* Default-568h@2x.png */; };
+		0516D86617EAF3C1006052FF /* launchimage_640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D86417EAF3C1006052FF /* launchimage_640x960.png */; };
+		0516D86917EAF40F006052FF /* launchimage_640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D86817EAF40F006052FF /* launchimage_640x1136.png */; };
 		051D8A0D17EA0470004273EE /* ICFormatControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D8A0C17EA0470004273EE /* ICFormatControl.m */; };
 		055E8A0417E9FBF7009EA946 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */; };
 		056936D116673F7D00091D92 /* MTAdvancedModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056936CF16673F7D00091D92 /* MTAdvancedModeViewController.m */; };
@@ -61,6 +63,8 @@
 		0516D85C17EAE8C4006052FF /* AppIcon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppIcon57x57.png; path = icons/AppIcon57x57.png; sourceTree = SOURCE_ROOT; };
 		0516D85D17EAE8C4006052FF /* AppIcon57x57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AppIcon57x57@2x.png"; path = "icons/AppIcon57x57@2x.png"; sourceTree = SOURCE_ROOT; };
 		0516D86017EAEA04006052FF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0516D86417EAF3C1006052FF /* launchimage_640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launchimage_640x960.png; path = Resources/images/launchimage_640x960.png; sourceTree = SOURCE_ROOT; };
+		0516D86817EAF40F006052FF /* launchimage_640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launchimage_640x1136.png; path = Resources/images/launchimage_640x1136.png; sourceTree = SOURCE_ROOT; };
 		051D8A0B17EA0470004273EE /* ICFormatControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormatControl.h; sourceTree = "<group>"; };
 		051D8A0C17EA0470004273EE /* ICFormatControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormatControl.m; sourceTree = "<group>"; };
 		055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
@@ -118,6 +122,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0516D86317EAF3AB006052FF /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				0516D85C17EAE8C4006052FF /* AppIcon57x57.png */,
+				0516D85D17EAE8C4006052FF /* AppIcon57x57@2x.png */,
+				0516D84817EAE7E8006052FF /* AppIcon29x29.png */,
+				0516D84917EAE7E8006052FF /* AppIcon29x29@2x.png */,
+				0516D84A17EAE7E8006052FF /* AppIcon40x40.png */,
+				0516D84B17EAE7E8006052FF /* AppIcon40x40@2x.png */,
+				0516D84C17EAE7E8006052FF /* AppIcon60x60.png */,
+				0516D84D17EAE7E8006052FF /* AppIcon60x60@2x.png */,
+				0516D84E17EAE7E8006052FF /* AppIcon76x76.png */,
+				0516D84F17EAE7E8006052FF /* AppIcon76x76@2x.png */,
+				0516D85017EAE7E8006052FF /* iTunesArtwork.png */,
+				0516D85117EAE7E8006052FF /* iTunesArtwork@2x.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
 		055E8A0517E9FBFE009EA946 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,18 +162,9 @@
 		0563330F17EA1DBF004FB317 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				0516D85C17EAE8C4006052FF /* AppIcon57x57.png */,
-				0516D85D17EAE8C4006052FF /* AppIcon57x57@2x.png */,
-				0516D84817EAE7E8006052FF /* AppIcon29x29.png */,
-				0516D84917EAE7E8006052FF /* AppIcon29x29@2x.png */,
-				0516D84A17EAE7E8006052FF /* AppIcon40x40.png */,
-				0516D84B17EAE7E8006052FF /* AppIcon40x40@2x.png */,
-				0516D84C17EAE7E8006052FF /* AppIcon60x60.png */,
-				0516D84D17EAE7E8006052FF /* AppIcon60x60@2x.png */,
-				0516D84E17EAE7E8006052FF /* AppIcon76x76.png */,
-				0516D84F17EAE7E8006052FF /* AppIcon76x76@2x.png */,
-				0516D85017EAE7E8006052FF /* iTunesArtwork.png */,
-				0516D85117EAE7E8006052FF /* iTunesArtwork@2x.png */,
+				0516D86817EAF40F006052FF /* launchimage_640x1136.png */,
+				0516D86417EAF3C1006052FF /* launchimage_640x960.png */,
+				0516D86317EAF3AB006052FF /* icons */,
 			);
 			name = images;
 			path = MiniTip;
@@ -327,10 +341,12 @@
 			files = (
 				058D115916644D5F00C003C3 /* InfoPlist.strings in Resources */,
 				0516D85A17EAE7E8006052FF /* iTunesArtwork.png in Resources */,
+				0516D86617EAF3C1006052FF /* launchimage_640x960.png in Resources */,
 				058D117616644DC300C003C3 /* UTViewController.xib in Resources */,
 				0516D85E17EAE8C4006052FF /* AppIcon57x57.png in Resources */,
 				0516D85217EAE7E8006052FF /* AppIcon29x29.png in Resources */,
 				0516D86117EAEA04006052FF /* Default-568h@2x.png in Resources */,
+				0516D86917EAF40F006052FF /* launchimage_640x1136.png in Resources */,
 				058D119B16672D6B00C003C3 /* MTMainViewController.xib in Resources */,
 				0516D85F17EAE8C4006052FF /* AppIcon57x57@2x.png in Resources */,
 				0516D85417EAE7E8006052FF /* AppIcon40x40.png in Resources */,
