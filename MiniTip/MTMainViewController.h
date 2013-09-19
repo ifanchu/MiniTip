@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MTMainViewController : UIViewController
+@interface MTMainViewController : UIViewController<UITextFieldDelegate>
 {
     
 }
 - (IBAction)showBasicPage:(id)sender;
 - (IBAction)showAdvancedPage:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *testUITextField;
 @end

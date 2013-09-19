@@ -16,10 +16,12 @@
     textField.backgroundColor = [UIColor clearColor];
     textField.layer.cornerRadius = 8.0f;
     textField.layer.masksToBounds = YES;
-    textField.layer.borderWidth = 1.0f;
-    textField.layer.borderColor = [[UIColor colorWithRed:69.0/255.0 green:122.0/255.0 blue:177.0/255.0 alpha:1.0f] CGColor];
+    textField.layer.borderWidth = 0.5f;
+    textField.layer.borderColor = [[ICFormatControl getCustomColorBlue] CGColor];
     textField.keyboardType = UIKeyboardTypeNumberPad;
     [textField setFont: [ICFormatControl getLatoFont:textField.font.pointSize]];
+    textField.borderStyle = UITextBorderStyleNone;
+    textField.textColor = [ICFormatControl getCustomColorBlue];
     
 }
 
@@ -36,6 +38,11 @@
 + (UIFont *)getLatoFont:(CGFloat)size
 {
     return [UIFont fontWithName:@"Lato" size:size];
+}
+
++ (UIColor *)getCustomColorBlue
+{
+    return [UIColor colorWithRed:69.0/255.0 green:122.0/255.0 blue:177.0/255.0 alpha:1.0f];
 }
 
 + (void)formatUILabel:(UILabel *)label
