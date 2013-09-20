@@ -22,6 +22,8 @@
 //    [label setFont: [ICFormatControl getLatoFont:label.font.pointSize]];
     label.font = [ICFormatControl getLatoFont:label.font.pointSize];
     label.textColor = [ICFormatControl getCustomColorBlue];
+    label.minimumScaleFactor = 0.5;
+    label.minimumFontSize = 10;
 }
 
 + (void)formatUITextField:(UITextField *)textField
@@ -31,11 +33,11 @@
 //    textField.borderStyle = UITextBorderStyleNone;
     textField.layer.cornerRadius = 8.0f;
     textField.layer.masksToBounds = YES;
-    textField.layer.borderWidth = 0.5f;
+    textField.layer.borderWidth = 0;
     textField.layer.borderColor = [[ICFormatControl getCustomColorBlue] CGColor];
     CGRect frameRect = textField.frame;
     frameRect.size.height = 40;
-    frameRect.size.width = 230;
+//    frameRect.size.width = 230;
     textField.frame = frameRect;
     textField.keyboardType = UIKeyboardTypeNumberPad;
     textField.font = [ICFormatControl getLatoFont:textField.font.pointSize];

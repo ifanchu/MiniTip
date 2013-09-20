@@ -32,7 +32,6 @@
     [self.view addGestureRecognizer:swipeDown];
     [self.view addGestureRecognizer:tap];
     // UI Setting
-//    [ICFormatControl formatUITextField:[self billAmountTextField]];
     [ICFormatControl formatUITextField:self.billAmountTextField withLeftVIewImage:@"bill-35.png"];
     [ICFormatControl formatUITextField:[self taxAmountTextField] withLeftVIewImage:@"money-35.png"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -44,7 +43,8 @@
     [ICFormatControl formatUILabel:self.totalLabel];
     [ICFormatControl formatUILabel:self.taxLabel];
     self.view.backgroundColor = [ICFormatControl getBackgroundColor];
-
+    [self.myScrollView addSubview:self.contentView];
+    ((UIScrollView *) self.myScrollView).contentSize = self.contentView.frame.size;
     [self calculate];
 }
 

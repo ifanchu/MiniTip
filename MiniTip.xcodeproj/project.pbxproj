@@ -31,6 +31,10 @@
 		0516D89B17EC0757006052FF /* card_in_use-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89917EC0757006052FF /* card_in_use-128.png */; };
 		0516D89C17EC0757006052FF /* user_male-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89A17EC0757006052FF /* user_male-128.png */; };
 		0516D89E17EC0C7E006052FF /* info-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89D17EC0C7E006052FF /* info-128.png */; };
+		0516D8A017EC2680006052FF /* up-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89F17EC2680006052FF /* up-128.png */; };
+		0516D8A317EC3529006052FF /* aligndown-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8A117EC3529006052FF /* aligndown-60.png */; };
+		0516D8A417EC3529006052FF /* aligntop-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8A217EC3529006052FF /* aligntop-60.png */; };
+		0516D8A817EC36CD006052FF /* minus-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8A717EC36CD006052FF /* minus-40.png */; };
 		051D8A0D17EA0470004273EE /* ICFormatControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D8A0C17EA0470004273EE /* ICFormatControl.m */; };
 		055E8A0417E9FBF7009EA946 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */; };
 		056936D116673F7D00091D92 /* MTAdvancedModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056936CF16673F7D00091D92 /* MTAdvancedModeViewController.m */; };
@@ -83,6 +87,10 @@
 		0516D89917EC0757006052FF /* card_in_use-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "card_in_use-128.png"; path = "Resources/icons/card_in_use-128.png"; sourceTree = SOURCE_ROOT; };
 		0516D89A17EC0757006052FF /* user_male-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user_male-128.png"; path = "Resources/icons/user_male-128.png"; sourceTree = SOURCE_ROOT; };
 		0516D89D17EC0C7E006052FF /* info-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info-128.png"; path = "Resources/icons/info-128.png"; sourceTree = SOURCE_ROOT; };
+		0516D89F17EC2680006052FF /* up-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "up-128.png"; path = "Resources/icons/up-128.png"; sourceTree = SOURCE_ROOT; };
+		0516D8A117EC3529006052FF /* aligndown-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "aligndown-60.png"; path = "Resources/icons/aligndown-60.png"; sourceTree = SOURCE_ROOT; };
+		0516D8A217EC3529006052FF /* aligntop-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "aligntop-60.png"; path = "Resources/icons/aligntop-60.png"; sourceTree = SOURCE_ROOT; };
+		0516D8A717EC36CD006052FF /* minus-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "minus-40.png"; path = "Resources/icons/minus-40.png"; sourceTree = SOURCE_ROOT; };
 		051D8A0B17EA0470004273EE /* ICFormatControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormatControl.h; sourceTree = "<group>"; };
 		051D8A0C17EA0470004273EE /* ICFormatControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormatControl.m; sourceTree = "<group>"; };
 		055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
@@ -171,6 +179,10 @@
 		0516D86F17EBE0E2006052FF /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				0516D8A717EC36CD006052FF /* minus-40.png */,
+				0516D8A117EC3529006052FF /* aligndown-60.png */,
+				0516D8A217EC3529006052FF /* aligntop-60.png */,
+				0516D89F17EC2680006052FF /* up-128.png */,
 				0516D89D17EC0C7E006052FF /* info-128.png */,
 				0516D89917EC0757006052FF /* card_in_use-128.png */,
 				0516D89A17EC0757006052FF /* user_male-128.png */,
@@ -394,13 +406,17 @@
 				0516D89717EC040A006052FF /* group-128.png in Resources */,
 				058D119B16672D6B00C003C3 /* MTMainViewController.xib in Resources */,
 				0516D85F17EAE8C4006052FF /* AppIcon57x57@2x.png in Resources */,
+				0516D8A817EC36CD006052FF /* minus-40.png in Resources */,
 				0516D85417EAE7E8006052FF /* AppIcon40x40.png in Resources */,
+				0516D8A417EC3529006052FF /* aligntop-60.png in Resources */,
 				056936D216673F7D00091D92 /* MTAdvancedModeViewController.xib in Resources */,
 				0516D89817EC040A006052FF /* waiter-128.png in Resources */,
+				0516D8A317EC3529006052FF /* aligndown-60.png in Resources */,
 				0516D85517EAE7E8006052FF /* AppIcon40x40@2x.png in Resources */,
 				056936D81667475000091D92 /* MTEntryTableViewCell.xib in Resources */,
 				0516D85317EAE7E8006052FF /* AppIcon29x29@2x.png in Resources */,
 				0516D88E17EBFA00006052FF /* bill-35.png in Resources */,
+				0516D8A017EC2680006052FF /* up-128.png in Resources */,
 				0516D89E17EC0C7E006052FF /* info-128.png in Resources */,
 				0516D89C17EC0757006052FF /* user_male-128.png in Resources */,
 				0516D89017EBFF8E006052FF /* money-35.png in Resources */,

@@ -25,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *peopleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 
+@property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+
 @property (strong, nonatomic) IBOutlet UILabel *totalLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taxLabel;
 
