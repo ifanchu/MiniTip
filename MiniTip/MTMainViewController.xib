@@ -29,7 +29,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="18">
-                    <rect key="frame" x="0.0" y="276" width="320" height="239"/>
+                    <rect key="frame" x="0.0" y="276.00000000000006" width="320" height="239"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
                     <state key="normal" title="PARTY">
@@ -40,7 +40,7 @@
                     </connections>
                 </button>
                 <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="23">
-                    <rect key="frame" x="0.0" y="516" width="320" height="51.000000000000057"/>
+                    <rect key="frame" x="0.0" y="516" width="320" height="51.000000000000064"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                 </adBannerView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jdD-LM-RlF">

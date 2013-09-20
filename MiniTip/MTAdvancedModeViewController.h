@@ -19,6 +19,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *entryTableView;
 @property (weak, nonatomic) IBOutlet UILabel *grandTotalLabel;
 
+@property (strong, nonatomic) IBOutlet UIButton *createSharedEntryButton;
+@property (strong, nonatomic) IBOutlet UIButton *createIndividualEntryButton;
+
+
 - (IBAction)calculateAndShowResultView:(id)sender;
 - (IBAction)addPersonalEntry:(id)sender;
 - (IBAction)addSharedEntry:(id)sender;

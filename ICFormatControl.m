@@ -33,7 +33,7 @@
 //    textField.borderStyle = UITextBorderStyleNone;
     textField.layer.cornerRadius = 8.0f;
     textField.layer.masksToBounds = YES;
-    textField.layer.borderWidth = 0;
+    textField.layer.borderWidth = 0.5f;
     textField.layer.borderColor = [[ICFormatControl getCustomColorBlue] CGColor];
     CGRect frameRect = textField.frame;
     frameRect.size.height = 40;
@@ -82,5 +82,15 @@
 + (UIColor *)getBackgroundColor
 {
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"paper_3.png"]];
+}
+
++ (void)setupCustomNavigationItemTitleView:(UINavigationItem *)navigationItem withCustomText:(NSString *)text
+{
+    CGRect frame = CGRectMake(0, 0, 400, 44);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.font = [UIFont boldSystemFontOfSize:30.0];
+    [ICFormatControl formatUILabel:label];
+    label.text = text;
+    navigationItem.titleView = label;
 }
 @end

@@ -129,15 +129,22 @@
     [doubleTap setNumberOfTapsRequired:2];
     [self.view addGestureRecognizer:doubleTap];
     
-    UINavigationItem *p = [self navigationItem];
-    [p setTitle:@"Entry Input"];
+    // setup custom UINavigation titleView
+    [ICFormatControl setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"PARTY"];
     
     // Load Custom cell nib file
     UINib *nib = [UINib nibWithNibName:@"MTEntryTableViewCell" bundle:nil];
     // Register this NIB which contains the cell
     [[self entryTableView] registerNib:nib forCellReuseIdentifier:@"MTEntryTableViewCell"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    // ui settings
+    [ICFormatControl formatUILabel:self.tipLabel];
+    [ICFormatControl formatUILabel:self.grandTotalLabel];
+    [ICFormatControl formatUITextField:self.taxTextField withLeftVIewImage:@"money-35.png"];
     self.view.backgroundColor = [ICFormatControl getBackgroundColor];
+    self.entryTableView.backgroundColor = [ICFormatControl getBackgroundColor];
+    self.createIndividualEntryButton.backgroundColor = [UIColor clearColor];
+    self.createSharedEntryButton.backgroundColor = [UIColor clearColor];
     [[self entryTableView] reloadData];
 }
 
@@ -290,11 +297,11 @@
 - (void)updateGrandTotal
 {
     double tipPercent = [[[self tipLabel] text] doubleValue]/100;
-    double totalTax = [[[self taxTextField] text] doubleValue];
+    double totalTax = [[ICFormatControl getFromUITextField:taxTextField] doubleValue];
     
     double grandTotal = [[MTEntryItemStore defaultStore] sumOfAllEntries]*(1+tipPercent) + totalTax;
     
-    [[self grandTotalLabel] setText:[NSString stringWithFormat:@"Grand Total: $%.2f", grandTotal]];
+    [[self grandTotalLabel] setText:[NSString stringWithFormat:@"$%.2f", grandTotal]];
 }
 
 //- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -309,6 +316,14 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self dismissKeyboard];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.taxTextField) {
+        return [ICFormatControl textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
+    }
     return YES;
 }
 

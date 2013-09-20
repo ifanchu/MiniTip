@@ -19,8 +19,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UINavigationItem *p = [self navigationItem];
-    [p setTitle:@"BASIC"];
+//    UINavigationItem *p = [self navigationItem];
+//    [p setTitle:@"BASIC"];
+    // setup custom UINavigation titleView
+    [ICFormatControl setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"BASIC"];
     
 	// Do any additional setup after loading the view, typically from a nib.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -44,6 +46,8 @@
     [ICFormatControl formatUILabel:self.taxLabel];
     self.view.backgroundColor = [ICFormatControl getBackgroundColor];
     [self.myScrollView addSubview:self.contentView];
+    self.myScrollView.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
     ((UIScrollView *) self.myScrollView).contentSize = self.contentView.frame.size;
     [self calculate];
 }

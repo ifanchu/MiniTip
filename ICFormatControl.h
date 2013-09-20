@@ -27,4 +27,6 @@
 + (UIFont *)getLatoFont: (CGFloat) size;
 + (void)formatUIButton:(UIButton *)button;
 + (UIColor *)getBackgroundColor;
++ (void)setupCustomNavigationItemTitleView:(UINavigationItem *)navigationItem withCustomText:(NSString *)text;
+
 @end
