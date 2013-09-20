@@ -11,6 +11,7 @@
 #import "MTEntryItemStore.h"
 #import "MTResultItemStore.h"
 #import "MTEntryItem.h"
+#import "ICFormatControl.h"
 
 @interface MTDetailsViewController ()
 
@@ -31,6 +32,9 @@
     
     UINavigationItem *p = [self navigationItem];
     [p setTitle:[NSString stringWithFormat:@"%@'s breakdown", [[self resultItem] getName]]];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.view.backgroundColor = [ICFormatControl getBackgroundColor];
+
 }
 
 - (void)didReceiveMemoryWarning

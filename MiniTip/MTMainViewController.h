@@ -14,5 +14,7 @@
 }
 - (IBAction)showBasicPage:(id)sender;
 - (IBAction)showAdvancedPage:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *basicButton;
+@property (strong, nonatomic) IBOutlet UIButton *partyButton;
 @property (strong, nonatomic) IBOutlet UITextField *testUITextField;
 @end

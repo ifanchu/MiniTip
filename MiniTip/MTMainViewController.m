@@ -37,7 +37,9 @@
     // Test Code
     [ICFormatControl formatUITextField:self.testUITextField];
     self.testUITextField.delegate = self;
-    
+    [ICFormatControl formatUIButton:self.basicButton];
+    [ICFormatControl formatUIButton:self.partyButton];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     NSLog(@"MTMain viewDidLoad");
 }
 

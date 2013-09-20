@@ -20,20 +20,31 @@
 {
     [super viewDidLoad];
     UINavigationItem *p = [self navigationItem];
-    [p setTitle:@"Tip Calculation"];
+    [p setTitle:@"BASIC"];
+    
 	// Do any additional setup after loading the view, typically from a nib.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft)];
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight)];
-    [self.view addGestureRecognizer:swipeLeft];
-    [self.view addGestureRecognizer:swipeRight];
+    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(focusOnBill)];
+    [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
+    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(focusOnTax)];
+    [swipeDown setDirection:UISwipeGestureRecognizerDirectionDown];
+    [self.view addGestureRecognizer:swipeUp];
+    [self.view addGestureRecognizer:swipeDown];
     [self.view addGestureRecognizer:tap];
     // UI Setting
-//    [[self billAmountTextField] setClearsOnBeginEditing:YES];
-//    [[self taxAmountTextField] setClearsOnBeginEditing:YES];
-    [ICFormatControl formatUITextField:[self billAmountTextField]];
-    [ICFormatControl formatUITextField:[self taxAmountTextField]];
+//    [ICFormatControl formatUITextField:[self billAmountTextField]];
+    [ICFormatControl formatUITextField:self.billAmountTextField withLeftVIewImage:@"bill-35.png"];
+    [ICFormatControl formatUITextField:[self taxAmountTextField] withLeftVIewImage:@"money-35.png"];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    [ICFormatControl formatUILabel:self.peopleLabel];
+    [ICFormatControl formatUILabel:self.tipLabel];
+    [ICFormatControl formatUILabel:self.grandTotalLabel];
+    [ICFormatControl formatUILabel:self.splitAmountLabel];
+    [ICFormatControl formatUILabel:self.totalTipLabel];
+    [ICFormatControl formatUILabel:self.totalLabel];
+    [ICFormatControl formatUILabel:self.taxLabel];
+    self.view.backgroundColor = [ICFormatControl getBackgroundColor];
+
     [self calculate];
 }
 
@@ -50,15 +61,13 @@
     [self calculate];
 }
 
-- (void)swipeLeft
+- (void)focusOnBill
 {
-    NSLog(@"Received swipe left.");
     [[self billAmountTextField] becomeFirstResponder];
 }
 
-- (void)swipeRight
+- (void)focusOnTax
 {
-    NSLog(@"Received swipe right.");
     [[self taxAmountTextField] becomeFirstResponder];
 }
 
@@ -77,7 +86,7 @@
     UISlider *slider = (UISlider *)sender;
     int progressAsInt = lroundf(slider.value);
     [slider setValue:progressAsInt];
-    NSString *newText = [[NSString alloc] initWithFormat:@"%d", progressAsInt];
+    NSString *newText = [[NSString alloc] initWithFormat:@"%d%@", progressAsInt, @"%"];
     [[self tipLabel] setText:newText];
     [[self easySplitSegmentedControl] setSelectedSegmentIndex:0];
     [self calculate];
@@ -90,7 +99,7 @@
 
 - (void)calculate
 {
-    double bill = [[[[self billAmountTextField] text] stringByReplacingOccurrencesOfString:@"$" withString:@"" ] doubleValue];
+    double bill = [[ICFormatControl getFromUITextField:billAmountTextField] doubleValue];
     double tax = [[[self taxAmountTextField] text] doubleValue];
     int selectedEasySplitMode = [[self easySplitSegmentedControl] selectedSegmentIndex];
     
@@ -106,13 +115,13 @@
         fGrand = fSplit * people;
         fTip = fGrand - bill - tax;
         double revisedTip = (((fGrand - tax)/bill) - 1) * 100;
-        [[self tipLabel] setText:[[NSString alloc] initWithFormat:@"%0.0f", (isnan(revisedTip)? 0: revisedTip)]];
+        [[self tipLabel] setText:[[NSString alloc] initWithFormat:@"%0.0f%@", (isnan(revisedTip)? 0: revisedTip), @"%"]];
     }else if (selectedEasySplitMode == 2){
         fSplit = floor(fSplit);
         fGrand = fSplit * people;
         fTip = fGrand - bill - tax;        
         double revisedTip = (((fGrand - tax)/bill) - 1) * 100;
-        [[self tipLabel] setText:[[NSString alloc] initWithFormat:@"%0.0f", (isnan(revisedTip)? 0: revisedTip)]];
+        [[self tipLabel] setText:[[NSString alloc] initWithFormat:@"%0.0f%@", (isnan(revisedTip)? 0: revisedTip), @"%"]];
     }
     [[self totalTipLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fTip]];
     [[self grandTotalLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fGrand]];

@@ -10,6 +10,7 @@
 
 #import "UTViewController.h"
 #import "MTMainViewController.h"
+#import "ICFormatControl.h"
 
 @implementation UTAppDelegate
 
@@ -22,6 +23,9 @@
 //    self.centerController = [[UTViewController alloc] initWithNibName:@"UTViewController" bundle:nil];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
+    // set window background imge, then set each view background to clear
+    self.window.backgroundColor = [ICFormatControl getBackgroundColor];
+    [self.window setFrame:[[UIScreen mainScreen] bounds]];
     return YES;
 }
 

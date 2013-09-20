@@ -38,6 +38,7 @@
     // Do any additional setup after loading the view from its nib.
     UINavigationItem *p = [self navigationItem];
     [p setTitle:@"Results"];
+    self.edgesForExtendedLayout = UIRectEdgeNone;    
 }
 
 - (void)didReceiveMemoryWarning

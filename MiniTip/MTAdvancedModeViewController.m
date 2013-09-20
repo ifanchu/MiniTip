@@ -13,6 +13,7 @@
 #import "MTResultsViewController.h"
 #import "MTResultItemStore.h"
 #import "MTResultItem.h"
+#import "ICFormatControl.h"
 
 @interface MTAdvancedModeViewController ()
 
@@ -135,7 +136,8 @@
     UINib *nib = [UINib nibWithNibName:@"MTEntryTableViewCell" bundle:nil];
     // Register this NIB which contains the cell
     [[self entryTableView] registerNib:nib forCellReuseIdentifier:@"MTEntryTableViewCell"];
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.view.backgroundColor = [ICFormatControl getBackgroundColor];
     [[self entryTableView] reloadData];
 }
 

@@ -10,19 +10,51 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ICFormatControl
+
++ (void)formatUIButton:(UIButton *)button
+{
+    [ICFormatControl formatUILabel:button.titleLabel];
+    button.backgroundColor = [UIColor clearColor];
+}
+
++ (void)formatUILabel:(UILabel *)label
+{
+//    [label setFont: [ICFormatControl getLatoFont:label.font.pointSize]];
+    label.font = [ICFormatControl getLatoFont:label.font.pointSize];
+    label.textColor = [ICFormatControl getCustomColorBlue];
+}
+
 + (void)formatUITextField:(UITextField *)textField
 {
     textField.textAlignment = NSTextAlignmentRight;
     textField.backgroundColor = [UIColor clearColor];
+//    textField.borderStyle = UITextBorderStyleNone;
     textField.layer.cornerRadius = 8.0f;
     textField.layer.masksToBounds = YES;
     textField.layer.borderWidth = 0.5f;
     textField.layer.borderColor = [[ICFormatControl getCustomColorBlue] CGColor];
+    CGRect frameRect = textField.frame;
+    frameRect.size.height = 40;
+    frameRect.size.width = 230;
+    textField.frame = frameRect;
     textField.keyboardType = UIKeyboardTypeNumberPad;
-    [textField setFont: [ICFormatControl getLatoFont:textField.font.pointSize]];
-    textField.borderStyle = UITextBorderStyleNone;
-    textField.textColor = [ICFormatControl getCustomColorBlue];
+    textField.font = [ICFormatControl getLatoFont:textField.font.pointSize];
+//    [textField setFont: [ICFormatControl getLatoFont:textField.font.pointSize]];
+        textField.textColor = [ICFormatControl getCustomColorBlue];
+//    textField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
+}
+
++ (NSString *)getFromUITextField:(UITextField *)textField
+{
+    return [textField.text stringByReplacingOccurrencesOfString:@"$" withString:@""];
+}
+
++ (void)formatUITextField:(UITextField *)textField withLeftVIewImage:(NSString *)leftViewImageName
+{
+    [ICFormatControl formatUITextField:textField];
+    [textField setLeftView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:leftViewImageName]]];
+    [textField setLeftViewMode:UITextFieldViewModeAlways];
 }
 
 + (BOOL)textField:(UITextField *)textField formatUITextFieldForCurrencyInDelegate:(NSRange)range replacementString:(NSString *)string
@@ -45,8 +77,8 @@
     return [UIColor colorWithRed:69.0/255.0 green:122.0/255.0 blue:177.0/255.0 alpha:1.0f];
 }
 
-+ (void)formatUILabel:(UILabel *)label
++ (UIColor *)getBackgroundColor
 {
-    
+    return [UIColor colorWithPatternImage:[UIImage imageNamed:@"paper_3.png"]];
 }
 @end
