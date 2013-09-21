@@ -104,29 +104,53 @@
 - (void)calculate
 {
     double bill = [[ICFormatControl getFromUITextField:billAmountTextField] doubleValue];
-    double tax = [[[self taxAmountTextField] text] doubleValue];
+    double tax = [[ICFormatControl getFromUITextField:taxAmountTextField] doubleValue];
+    double preTax = bill - tax;
+    //It doesn't make sense if tax > bill * 0.2
+    if (tax > bill * 0.2) {
+        taxAmountTextField.textColor = [UIColor redColor];
+    }else{
+        taxAmountTextField.textColor = [ICFormatControl getCustomColorBlue];
+    }
+    // 0: no modify, 1: round up, 2: round down
     int selectedEasySplitMode = [[self easySplitSegmentedControl] selectedSegmentIndex];
-    
+    // how many ppl
     int people = (int)([[self peopleSlider] value]+0.5f);
-    double tip = ([[self tipSlider] value]/100);
-    
-    double fTip = bill * tip;
-    double fGrand = bill * (1 + tip) + tax;
+    // tip %
+    double tip = ([[self tipSlider] value]*0.01);
+    // total tip = (bill - tax )* tip
+    double fTip = preTax * tip;
+    // total paying amount
+    double fGrand = preTax * (1 + tip) + tax;
+    // splitted amount
     double fSplit = fGrand / people;
+    // revisedTip %
+    double revisedTip = tip;
     
     if (selectedEasySplitMode == 1) {
+        // round up the splitted amount
         fSplit = ceil(fSplit);
+        //revised grand total
         fGrand = fSplit * people;
-        fTip = fGrand - bill - tax;
-        double revisedTip = (((fGrand - tax)/bill) - 1) * 100;
-        [[self tipLabel] setText:[[NSString alloc] initWithFormat:@"%0.0f%@", (isnan(revisedTip)? 0: revisedTip), @"%"]];
+        // revised total tip
+        fTip = fGrand - preTax - tax;
+        // revised tip %
+        revisedTip = (((fGrand - tax)/preTax) - 1);
     }else if (selectedEasySplitMode == 2){
+        // round down the splitted amount
         fSplit = floor(fSplit);
         fGrand = fSplit * people;
-        fTip = fGrand - bill - tax;        
-        double revisedTip = (((fGrand - tax)/bill) - 1) * 100;
-        [[self tipLabel] setText:[[NSString alloc] initWithFormat:@"%0.0f%@", (isnan(revisedTip)? 0: revisedTip), @"%"]];
+        fTip = fGrand - preTax - tax;
+        revisedTip = (((fGrand - tax)/preTax) - 1);
+        // if revisedTip < 0, make it 0
+        if (revisedTip < 0) {
+            revisedTip = 0;
+            fGrand = bill;
+            fTip = 0;
+            fSplit = (fGrand / people);
+        }
     }
+    [[self tipLabel] setText:[[NSString alloc] initWithFormat:@"%0.0f%@", (isnan(revisedTip)? 0: revisedTip*100), @"%"]];
     [[self totalTipLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fTip]];
     [[self grandTotalLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fGrand]];
     [[self splitAmountLabel] setText:[[NSString alloc] initWithFormat:@"$ %0.2f", fSplit]];
@@ -136,6 +160,11 @@
 {
     
     return [ICFormatControl textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [ICFormatControl overrideTextFieldDidBeginEditing:textField];
 }
 
 @end
