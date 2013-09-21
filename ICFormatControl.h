@@ -30,5 +30,7 @@
 + (void)formatUIButton:(UIButton *)button;
 + (UIColor *)getBackgroundColor;
 + (void)setupCustomNavigationItemTitleView:(UINavigationItem *)navigationItem withCustomText:(NSString *)text;
++ (UIColor *)getCustomColorBlue;
++ (void)overrideTextFieldDidBeginEditing:(UITextField *)textField;
 
 @end

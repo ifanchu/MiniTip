@@ -94,4 +94,9 @@
     label.text = text;
     navigationItem.titleView = label;
 }
+
++ (void)overrideTextFieldDidBeginEditing:(UITextField *)textField
+{
+    textField.text = @"";
+}
 @end
