@@ -22,16 +22,17 @@
 @implementation MTAdvancedModeViewController
 @synthesize tipLabel, tipSlider, taxTextField;
 
+int const TAG_TAX_AMOUNT_UITEXTFIELD = 3;
+int const TAG_ENTRY_FOR_NAME = 1;
+int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
+
 - (id)init
 {
     // Call the superclass's designated initializer
     self = [super init];
     if (self) {
-
-        // Set this bar button item as the right item in the navigationItem
-//        [[self navigationItem] setLeftBarButtonItem:bbi];
-        // TODO: change this to initWithImage
-        UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithTitle:@"Calculate" style:UIBarButtonItemStyleBordered target:self action:@selector(calculateAndShowResultView:)];
+//        UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithTitle:@"Calculate" style:UIBarButtonItemStyleBordered target:self action:@selector(calculateAndShowResultView:)];
+        UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"math-128.png"] style:UIBarButtonItemStyleDone target:self action:@selector(calculateAndShowResultView:)];
 
         [[self navigationItem] setRightBarButtonItem:btnCalculate animated:YES];
         [self shouldBtnCalculateEnabled];
@@ -54,7 +55,7 @@
     NSLog(@"Pressed Calculate");
     [self dismissKeyboard];
     double tipPercent = [[[self tipLabel] text] doubleValue]/100;
-    double totalTax = [[[self taxTextField] text] doubleValue];
+    double totalTax = [[ICFormatControl getFromUITextField:self.taxTextField] doubleValue];
 
     for (MTEntryItem *p in [[MTEntryItemStore defaultStore] allEntries]) {
         if (p.isSharedEntry)
@@ -106,10 +107,9 @@
     int idx = [[[MTEntryItemStore defaultStore] allEntries] count] - 10 - 1;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
     MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
-    [[cell entryAmountInDollar] becomeFirstResponder];
+    [[cell entryForName] becomeFirstResponder];
     [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
     [ICFormatControl formatUITextField:[cell entryForName]];
-    //TODO: set entryAmountInDollar delegate to self
     cell.entryAmountInDollar.delegate = self;
     [[cell entryForName] setKeyboardType:UIKeyboardTypeAlphabet];
     [[cell centerButton] setImage:[UIImage imageNamed:@"user_male-128.png"] forState:UIControlStateNormal];
@@ -128,7 +128,6 @@
     [[cell entryAmountInDollar] becomeFirstResponder];
     [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
     [ICFormatControl formatUITextField:[cell entryForName]];
-    //TODO: set entryAmountInDollar delegate to self
     cell.entryAmountInDollar.delegate = self;
     [[cell entryForName] setKeyboardType:UIKeyboardTypeAlphabet];
     [[cell centerButton] setImage:[UIImage imageNamed:@"group-128.png"] forState:UIControlStateNormal];
@@ -155,6 +154,7 @@
     [ICFormatControl formatUILabel:self.tipLabel];
     [ICFormatControl formatUILabel:self.grandTotalLabel];
     [ICFormatControl formatUITextField:self.taxTextField withLeftVIewImage:@"money-35.png"];
+    taxTextField.tag = TAG_TAX_AMOUNT_UITEXTFIELD;
     self.view.backgroundColor = [ICFormatControl getBackgroundColor];
     self.entryTableView.backgroundColor = [ICFormatControl getBackgroundColor];
     self.createIndividualEntryButton.backgroundColor = [UIColor clearColor];
@@ -186,6 +186,7 @@
         [[aCell entryForName] resignFirstResponder];
         [[aCell entryAmountInDollar] resignFirstResponder];
     }
+    [self.view endEditing:YES];
 }
 
 - (IBAction)tipSliderChanged:(id)sender {
@@ -263,27 +264,32 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // get textField's cell's index path
-    MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[textField superview] superview];
+    MTEntryTableViewCell *cell = [ICFormatControl getCellFromTextField:textField];
     NSIndexPath *indexPath = [self.entryTableView indexPathForCell:cell];
-    // if tag==0, it is entryAmountInDollar
-    // if tag==1, it is entryForName
     switch (textField.tag) {
-        case 0:
+        case TAG_ENTRY_AMOUNT_IN_DOLLAR:
         {
             NSLog(@"textFieldDidEndEditing for %@, IndexPath %d", @"entryAmountInDollar", [indexPath row]);
             // save entryAmountInDollar into MTEntryItem in IndexPath
             MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
-            p.entryAmountInDollar = [textField text];
-            // move firstResponder to entryForName
-//            [[cell entryForName] becomeFirstResponder];
+            p.entryAmountInDollar = [ICFormatControl getFromUITextField:textField];
             break;
         }
-        case 1:
+        case TAG_ENTRY_FOR_NAME:
         {
             NSLog(@"textFieldDidEndEditing for %@, IndexPath %d", @"entryForName", [indexPath row]);
             MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
             p.entryForName = [textField text];
+//            [[cell entryAmountInDollar] becomeFirstResponder];
             break;
+        }
+        case TAG_TAX_AMOUNT_UITEXTFIELD:
+        {
+            // create a personal entry if the tableview has no row
+            int count = [[self entryTableView] numberOfRowsInSection:0];
+            if (count == 0) {
+                [self addPersonalEntry:nil];
+            }
         }
         default:
             break;
@@ -301,9 +307,13 @@
 
 
     // get textField's cell's index path
-    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:(MTEntryTableViewCell *)[[textField superview] superview]];
+    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:[ICFormatControl getCellFromTextField:textField]];
 
     [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+    if (textField.tag == 3) {
+        textField.text = @"";
+    }
 }
 
 - (void)updateGrandTotal
@@ -316,25 +326,29 @@
     [[self grandTotalLabel] setText:[NSString stringWithFormat:@"$%.2f", grandTotal]];
 }
 
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-////    self.entryTableView.frame= CGRectMake(self.entryTableView.frame.origin.x, self.entryTableView.frame.origin.y, self.entryTableView.frame.size.width, 70.0f);
-////    NSIndexPath *indexPath =[NSIndexPath indexPathForRow:nIndex inSection:nSectionIndex];
-//    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:(MTEntryTableViewCell *)[[textField superview] superview]];
-//    [self.entryTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-//    return YES;
-//}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self dismissKeyboard];
+    switch (textField.tag) {
+        case TAG_ENTRY_FOR_NAME:
+        {
+            // If name loses focus, move focus to amount
+            [[[ICFormatControl getCellFromTextField:textField] entryAmountInDollar] becomeFirstResponder];
+            break;
+        }
+        case TAG_ENTRY_AMOUNT_IN_DOLLAR:
+        {
+            // do nothing, there is no return button
+        }
+        default:
+            break;
+    }
     return YES;
 }
 
 // UITextField delegate override: change currency UITextField text on the fly to comform with currency format: $00.00
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (textField == self.taxTextField) {
+    if (textField == self.taxTextField || textField.tag == 0) {
         return [ICFormatControl textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
     }
     return YES;

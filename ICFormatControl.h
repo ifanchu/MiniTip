@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MTEntryTableViewCell.h"
 
 // This class is to provide an app-wide staic method store
 // as convenience
@@ -31,6 +32,6 @@
 + (UIColor *)getBackgroundColor;
 + (void)setupCustomNavigationItemTitleView:(UINavigationItem *)navigationItem withCustomText:(NSString *)text;
 + (UIColor *)getCustomColorBlue;
-+ (void)overrideTextFieldDidBeginEditing:(UITextField *)textField;
-
++ (void)cleanTextWhenTextFieldDidBeginEditing:(UITextField *)textField;
++ (MTEntryTableViewCell *)getCellFromTextField:(UITextField *)textField;
 @end

@@ -13,11 +13,6 @@
 {
 }
 @property (nonatomic, strong) NSMutableArray *personalEntries;
-//@property (nonatomic, weak) NSArray *sharedEntries;
-//@property (nonatomic) int sumOfPeople;
-//@property (nonatomic) double totalTip;
-//@property (nonatomic) double totalTax;
-//@property (nonatomic) double sumOfAllEntries;
 
 - (double)sumOfPersonalEntries;
 - (double)tipForName;

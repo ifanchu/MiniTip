@@ -8,6 +8,7 @@
 
 #import "ICFormatControl.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MTEntryTableViewCell.h"
 
 @implementation ICFormatControl
 
@@ -95,8 +96,13 @@
     navigationItem.titleView = label;
 }
 
-+ (void)overrideTextFieldDidBeginEditing:(UITextField *)textField
++ (void)cleanTextWhenTextFieldDidBeginEditing:(UITextField *)textField
 {
     textField.text = @"";
+}
+
++ (MTEntryTableViewCell *)getCellFromTextField:(UITextField *)textField
+{
+    return (MTEntryTableViewCell *)[[[textField superview] superview] superview];
 }
 @end

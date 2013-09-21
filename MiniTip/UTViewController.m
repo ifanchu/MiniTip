@@ -16,6 +16,9 @@
 @implementation UTViewController
 @synthesize billAmountTextField, taxAmountTextField, peopleSlider, tipSlider, easySplitSegmentedControl, grandTotalLabel, splitAmountLabel, peopleLabel, tipLabel, totalTipLabel;
 
+int const TAG_FOR_BILL_AMOUNT=0;
+int const TAG_FOR_TAX_AMOUNT=1;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -34,6 +37,8 @@
     [self.view addGestureRecognizer:swipeDown];
     [self.view addGestureRecognizer:tap];
     // UI Setting
+    billAmountTextField.tag = TAG_FOR_BILL_AMOUNT;
+    taxAmountTextField.tag = TAG_FOR_TAX_AMOUNT;
     [ICFormatControl formatUITextField:self.billAmountTextField withLeftVIewImage:@"bill-35.png"];
     [ICFormatControl formatUITextField:[self taxAmountTextField] withLeftVIewImage:@"money-35.png"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -164,7 +169,25 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [ICFormatControl overrideTextFieldDidBeginEditing:textField];
+    [ICFormatControl cleanTextWhenTextFieldDidBeginEditing:textField];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    switch (textField.tag) {
+        case TAG_FOR_BILL_AMOUNT:
+        {
+            [[self taxAmountTextField] becomeFirstResponder];
+            break;
+        }
+        case TAG_FOR_TAX_AMOUNT:
+        {
+            [[self taxAmountTextField] resignFirstResponder];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 @end

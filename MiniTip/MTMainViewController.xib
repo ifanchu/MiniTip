@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="basicButton" destination="4" id="1Qt-an-4k2"/>
                 <outlet property="partyButton" destination="18" id="ZdV-DW-rd3"/>
+                <outlet property="showInfoButton" destination="jdD-LM-RlF" id="gV9-ZK-o8M"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -49,6 +50,9 @@
                     <state key="normal" image="info-128.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="showInfoPage:" destination="-1" eventType="touchUpInside" id="CNe-4f-O3S"/>
+                    </connections>
                 </button>
             </subviews>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

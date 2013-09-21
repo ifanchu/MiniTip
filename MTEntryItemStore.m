@@ -155,7 +155,7 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
     for (MTEntryItem *i in entries) {
         if ([i isSharedEntry])
             continue;
-        if ([[i entryForName] length] != 0)
+        if ([[i entryForName] length] != 0 && [self sumOfAllEntries] > 0)
             return YES;
     }
     return NO;

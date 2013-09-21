@@ -34,9 +34,6 @@
     UINavigationItem *p = [self navigationItem];
     [p setTitle:@"MiniTip"];
     
-    // Test Code
-    [ICFormatControl formatUITextField:self.testUITextField];
-    self.testUITextField.delegate = self;
     [ICFormatControl formatUIButton:self.basicButton];
     [ICFormatControl formatUIButton:self.partyButton];
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -73,6 +70,11 @@
 {
     MTAdvancedModeViewController *advancedController = [[MTAdvancedModeViewController alloc] init];
     [[self navigationController] pushViewController:advancedController animated:YES];
+}
+
+- (IBAction)showInfoPage:(id)sender
+{
+    //TODO: implement info page
 }
 
 @end
