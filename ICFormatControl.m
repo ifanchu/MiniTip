@@ -105,4 +105,14 @@
 {
     return (MTEntryTableViewCell *)[[[textField superview] superview] superview];
 }
+
++ (UIImage *)getGroupImage
+{
+    return [UIImage imageNamed:@"group-128.png"];
+}
+
++ (UIImage *)getPersonalImage
+{
+    return [UIImage imageNamed:@"user_male-128.png"];
+}
 @end

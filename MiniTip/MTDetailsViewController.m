@@ -19,6 +19,12 @@
 
 @implementation MTDetailsViewController
 
+int const SECTION_PERSONAL_ENTRIES = 0;
+int const SECTION_SHARED_ENTRIES = 1;
+int const SECTION_TIP = 2;
+int const SECTION_TAX = 3;
+int const SECTION_SUBTOTAL = 4;
+
 - (id)initWithResultItem:(MTResultItem *)aResultItem
 {
     self = [super init];
@@ -31,10 +37,11 @@
     [super viewDidLoad];
     
     UINavigationItem *p = [self navigationItem];
-    [p setTitle:[NSString stringWithFormat:@"%@'s breakdown", [[self resultItem] getName]]];
+//    [p setTitle:[NSString stringWithFormat:@"%@'s breakdown", [[self resultItem] getName]]];
+    [ICFormatControl setupCustomNavigationItemTitleView:p withCustomText:@"BREAKDOWN"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [ICFormatControl getBackgroundColor];
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,31 +58,31 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     switch (section) {
-        case 0:
+        case SECTION_PERSONAL_ENTRIES:
         {
             // Personal Entries section
             int count = [[[self resultItem] personalEntries] count];
             NSLog(@"Personal Entries count: %d", count);
             return (count==0? 1:count);
         }
-        case 1:
+        case SECTION_SHARED_ENTRIES:
         {
             // shared entries section
             int count = [[[MTEntryItemStore defaultStore] getSharedEntries] count];
             NSLog(@"Personal Entries count: %d", count);
             return (count==0? 1:count);
         }
-        case 2:
+        case SECTION_TIP:
         {
             // tip section
             return 1;
         }
-        case 3:
+        case SECTION_TAX:
         {
             //tax section
             return 1;
         }
-        case 4:
+        case SECTION_SUBTOTAL:
         {
             // subtotal section
             return 1;
@@ -85,44 +92,44 @@
     }
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    switch (section) {
-        case 0:
-        {
-            // Personal Entries section
-            return @"Personal Entries";
-            break;
-        }
-        case 1:
-        {
-            // shared entries section
-            return @"Shared Entries";
-            break;
-        }
-        case 2:
-        {
-            // tip section
-            return [NSString stringWithFormat:@"Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]];
-            break;
-        }
-        case 3:
-        {
-            //tax section
-            return [NSString stringWithFormat:@"Total Tax: $%.2f", [[MTResultItemStore defaultStore] totalTax]];
-            break;
-        }
-        case 4:
-        {
-            // subtotal section
-            return @"";
-            break;
-        }
-        default:
-            return @"";
-            break;
-    }
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    switch (section) {
+//        case SECTION_PERSONAL_ENTRIES:
+//        {
+//            // Personal Entries section
+//            return [NSString stringWithFormat:@"%@'s Entries", self.resultItem.getName];
+//            break;
+//        }
+//        case SECTION_SHARED_ENTRIES:
+//        {
+//            // shared entries section
+//            return @"Shared Entries";
+//            break;
+//        }
+//        case SECTION_TIP:
+//        {
+//            // tip section
+//            return [NSString stringWithFormat:@"Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]];
+//            break;
+//        }
+//        case SECTION_TAX:
+//        {
+//            //tax section
+//            return [NSString stringWithFormat:@"Total Tax: $%.2f", [[MTResultItemStore defaultStore] totalTax]];
+//            break;
+//        }
+//        case SECTION_SUBTOTAL:
+//        {
+//            // subtotal section
+//            return @"";
+//            break;
+//        }
+//        default:
+//            return @"";
+//            break;
+//    }
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -133,7 +140,7 @@
     }
     
     switch ([indexPath section]) {
-        case 0:
+        case SECTION_PERSONAL_ENTRIES:
         {
             if ([[[self resultItem] personalEntries] count] == 0) {
                 [[cell textLabel] setText:@"No Personal Entry"];
@@ -145,7 +152,7 @@
             [[cell detailTextLabel] setText: [NSString stringWithFormat:@"$%@", [entry entryAmountInDollar]]];
             break;
         }
-        case 1:
+        case SECTION_SHARED_ENTRIES:
         {
             if ([[[MTEntryItemStore defaultStore] getSharedEntries] count] == 0) {
                 [[cell textLabel] setText:@"No Shared Entry"];
@@ -159,7 +166,7 @@
             [[cell detailTextLabel] setText: [NSString stringWithFormat:@"$%.2f", sharedEntryCost/sumOfPeople]];
             break;
         }
-        case 2:
+        case SECTION_TIP:
         {
             double totalTip = [[MTResultItemStore defaultStore] totalTip];
             double sumOfAllEntries = [[MTResultItemStore defaultStore] sumOfAllEntries];
@@ -172,7 +179,7 @@
             [[cell detailTextLabel] setText:[NSString stringWithFormat:@"$%.2f", (totalTip/sumOfAllEntries*(sumOfPersonalEntries+sumOfSharedEntries))]];
             break;
         }
-        case 3:
+        case SECTION_TAX:
         {
             double totalTax = [[MTResultItemStore defaultStore] totalTax];
             double sumOfAllEntries = [[MTResultItemStore defaultStore] sumOfAllEntries];
@@ -185,7 +192,7 @@
             [[cell detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
             break;
         }
-        case 4:
+        case SECTION_SUBTOTAL:
         {
             [[cell textLabel] setText:[NSString stringWithFormat:@"%@ should pay", [[self resultItem] getName]]];
             [[cell detailTextLabel] setText:[NSString stringWithFormat:@"$%.2f", [[self resultItem] totalForName]]];
@@ -214,18 +221,42 @@
     return NO;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [ICFormatControl formatUILabel:cell.textLabel];
+    [ICFormatControl formatUILabel:cell.detailTextLabel];
+}
+// create a UILabel, format it and assign it to header
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel *aLabel = [[UILabel alloc] init];
+    switch (section) {
+        case SECTION_PERSONAL_ENTRIES:
+            aLabel.text = [[NSString stringWithFormat:@"%@'s Entries", self.resultItem.getName] uppercaseString];
+            break;
+        case SECTION_SHARED_ENTRIES:
+            aLabel.text = [@"Shared Entries" uppercaseString];
+            break;
+        case SECTION_TIP:
+            aLabel.text = [[NSString stringWithFormat:@"Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]] uppercaseString];
+            break;
+        case SECTION_TAX:
+            aLabel.text = [[NSString stringWithFormat:@"Total Tax: $%.2f", [[MTResultItemStore defaultStore] totalTax]] uppercaseString];
+            break;
+        case SECTION_SUBTOTAL:
+            aLabel.text = [@"Subtotal" uppercaseString];
+            break;
+        default:
+            break;
+    }
+    [ICFormatControl formatUILabel:aLabel];
+    return aLabel;
+}
 
-#pragma mark - Table view delegate
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // Navigation logic may go here. Create and push another view controller.
-//    /*
-//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-//     // ...
-//     // Pass the selected object to the new view controller.
-//     [self.navigationController pushViewController:detailViewController animated:YES];
-//     */
-//}
+// Need to implement this delegate method for viewForHeaderInSection to work properly
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
+}
 
 @end

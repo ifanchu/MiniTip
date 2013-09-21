@@ -43,11 +43,6 @@
     if (self) {
         if (!entries){
             entries = [[NSMutableArray alloc] init];
-//            for (int i=0; i < NUMBER_OF_INVISIBLE_CELL; i++) {
-//                // add 10 invisible entries to entries array
-//                // this is to implement the scrolling feature
-//                [entries addObject:[MTEntryItem getInvisibleEntry]];
-//            }
         }
         if(!sharedEntries)
             sharedEntries = [[NSMutableArray alloc] init];

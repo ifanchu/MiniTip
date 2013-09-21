@@ -169,7 +169,6 @@ int const TAG_FOR_TAX_AMOUNT=1;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [ICFormatControl cleanTextWhenTextFieldDidBeginEditing:textField];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

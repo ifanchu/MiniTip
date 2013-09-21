@@ -24,6 +24,11 @@
 
 @property (nonatomic) NSIndexPath *editingIndexPath;
 
+@property (nonatomic) UIKeyboardType currentKBType;
+@property (nonatomic, strong) UITextField *editingTextField;
+@property (nonatomic,strong) UIButton *doneButton;
+@property (nonatomic) BOOL isDoneButtonDisplayed;
+
 
 - (IBAction)calculateAndShowResultView:(id)sender;
 - (IBAction)addPersonalEntry:(id)sender;

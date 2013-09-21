@@ -25,6 +25,7 @@
 int const TAG_TAX_AMOUNT_UITEXTFIELD = 3;
 int const TAG_ENTRY_FOR_NAME = 1;
 int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
+NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 
 - (id)init
 {
@@ -99,6 +100,12 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
 - (IBAction)addPersonalEntry:(id)sender
 {
     NSLog(@"Pressed addPersonalEntry");
+    // TODO: do not add any entry if the last entry amountInDollor is empty
+    // get last entry
+    MTEntryTableViewCell *aCell = (MTEntryTableViewCell *)[self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.entryTableView numberOfRowsInSection:0]-1 inSection:0]];
+    if (aCell != nil && [ICFormatControl getFromUITextField:aCell.entryAmountInDollar].length == 0) {
+        return;
+    }
     // Create a new Personal EntryItem and add it to the store
     [[MTEntryItemStore defaultStore] createPersonalEntry];
 //    MTEntryItemStore *store = [MTEntryItemStore defaultStore];
@@ -140,8 +147,10 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
     // register keyboard notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:tap];
+    // part of add button to keyboard task
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+//    [self.view addGestureRecognizer:tap];
 //    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap)];
 //    [doubleTap setNumberOfTapsRequired:2];
 //    [self.view addGestureRecognizer:doubleTap];
@@ -163,6 +172,10 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
     self.entryTableView.backgroundColor = [ICFormatControl getBackgroundColor];
     self.createIndividualEntryButton.backgroundColor = [UIColor clearColor];
     self.createSharedEntryButton.backgroundColor = [UIColor clearColor];
+    
+    // add 1 entry to tableview first, at least 1 personal entry
+    [self addPersonalEntry:nil];
+    
     [[self entryTableView] reloadData];
 }
 
@@ -267,6 +280,9 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
             // save entryAmountInDollar into MTEntryItem in IndexPath
             MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
             p.entryAmountInDollar = [ICFormatControl getFromUITextField:textField];
+            if (p.entryAmountInDollar.length > 0) {
+                [self addPersonalEntry:nil];
+            }
             break;
         }
         case TAG_ENTRY_FOR_NAME:
@@ -305,10 +321,20 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
     self.editingIndexPath = indexPath;
 
     [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
 
-    if (textField.tag == 3) {
-        textField.text = @"";
+// part of add done button task
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    self.currentKBType = textField.keyboardType;
+    if (textField.keyboardType == UIKeyboardTypeNumberPad && !self.isDoneButtonDisplayed) {
+        [self addDoneButtonToKeyboard];
+    }else{
+        [self removeDoneButtonFromKeyboard];
     }
+    
+    self.editingTextField = textField;
+    return YES;
 }
 
 - (void)updateGrandTotal
@@ -368,7 +394,7 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     // This app only runs in Portrait mode
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height), 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height)-45, 0.0);
     
     self.entryTableView.contentInset = contentInsets;
     self.entryTableView.scrollIndicatorInsets = contentInsets;
@@ -381,6 +407,49 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
     UIEdgeInsets edge = UIEdgeInsetsMake(0, 0, 0, 0);
     self.entryTableView.scrollIndicatorInsets = edge;
     self.entryTableView.contentInset = edge;
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    if (self.currentKBType == UIKeyboardTypeNumberPad && !self.isDoneButtonDisplayed) {
+        [self addDoneButtonToKeyboard];
+    }else{
+        [self removeDoneButtonFromKeyboard];
+    }
+}
+
+- (void)addDoneButtonToKeyboard
+{
+    // create done button
+    self.doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.doneButton.frame = CGRectMake(0, 163, 106, 53);
+    [self.doneButton setTitle:TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD forState:UIControlStateNormal];
+    [self.doneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.doneButton addTarget:self action:@selector(pressedDoneButton) forControlEvents:UIControlEventTouchUpInside];
+    // locate keyboard view
+    if ([[[UIApplication sharedApplication] windows] count] > 1){
+        UIWindow *tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
+        UIView *keyboard;
+        for (int i=0; i<[tempWindow.subviews count]; i++) {
+            keyboard = [tempWindow.subviews objectAtIndex:i];
+            if ([[keyboard description] hasPrefix:@"<UIPeripheralHost"] == YES) {
+                [keyboard addSubview:self.doneButton];
+                self.isDoneButtonDisplayed = YES;
+            }
+        }
+    }
+}
+
+-(void)removeDoneButtonFromKeyboard
+{
+    [self.doneButton removeFromSuperview];
+    self.isDoneButtonDisplayed = NO;
+}
+
+- (void)pressedDoneButton
+{
+    [self.editingTextField resignFirstResponder];
+    self.isDoneButtonDisplayed = NO;
 }
 
 @end

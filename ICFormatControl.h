@@ -34,4 +34,8 @@
 + (UIColor *)getCustomColorBlue;
 + (void)cleanTextWhenTextFieldDidBeginEditing:(UITextField *)textField;
 + (MTEntryTableViewCell *)getCellFromTextField:(UITextField *)textField;
+// image for shared entry
++ (UIImage *)getGroupImage;
+// image for personal entry
++ (UIImage *)getPersonalImage;
 @end
