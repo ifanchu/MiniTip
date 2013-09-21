@@ -7,6 +7,7 @@
 //
 
 #import "MTEntryTableViewCell.h"
+#import "ICFormatControl.h"
 
 @implementation MTEntryTableViewCell
 @synthesize entryAmountInDollar, entryForName, isSharedEntry;
@@ -19,6 +20,7 @@
     [[cell entryForName] setText:@""];
     [[cell entryForName] setEnabled:YES];
     cell.isSharedEntry = NO;
+    [cell.centerButton setImage:[UIImage imageNamed:@"user_male-128.png"] forState:UIControlStateNormal];
     return cell;
 }
 
@@ -30,6 +32,7 @@
     [[cell entryForName] setText:@""];
     [[cell entryForName] setEnabled:NO];
     cell.isSharedEntry = YES;
+    [cell.centerButton setImage:[UIImage imageNamed:@"group-128.png"] forState:UIControlStateNormal];
     return cell;
 }
 
@@ -38,10 +41,13 @@
     isSharedEntry = aIsSharedEntry;
     [[self entryForName] setEnabled:((aIsSharedEntry)? NO:YES)];
     if (isSharedEntry) {
-        [[self entryForName] setText:@"SHARED"];
+        [[self entryForName] setText:@""];
+        //TODO: set placeholder text to empty
+        self.entryForName.placeholder = @"";
     }
 }
 
+//TODO: action for centerButton,
 - (IBAction)moveFirstResponder:(id)sender{
     [[self entryForName] becomeFirstResponder];
     if ([self isSharedEntry])

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+// This class is to provide an app-wide staic method store
+// as convenience
 @interface ICFormatControl : NSObject
 // Format UITextField, needs to be called for each UITextField which requires formatting
 // how to apply this on UITextField:

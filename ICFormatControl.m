@@ -30,12 +30,13 @@
 {
     textField.textAlignment = NSTextAlignmentRight;
     textField.backgroundColor = [UIColor clearColor];
-//    textField.borderStyle = UITextBorderStyleNone;
+    textField.borderStyle = UITextBorderStyleNone;
     textField.layer.cornerRadius = 8.0f;
     textField.layer.masksToBounds = YES;
     textField.layer.borderWidth = 0.5f;
     textField.layer.borderColor = [[ICFormatControl getCustomColorBlue] CGColor];
     CGRect frameRect = textField.frame;
+    textField.layer.borderColor = [[UIColor clearColor] CGColor];
     frameRect.size.height = 40;
 //    frameRect.size.width = 230;
     textField.frame = frameRect;
@@ -44,7 +45,7 @@
 //    [textField setFont: [ICFormatControl getLatoFont:textField.font.pointSize]];
         textField.textColor = [ICFormatControl getCustomColorBlue];
 //    textField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
+
 }
 
 + (NSString *)getFromUITextField:(UITextField *)textField

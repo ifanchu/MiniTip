@@ -27,10 +27,10 @@
     // Call the superclass's designated initializer
     self = [super init];
     if (self) {
-        
+
         // Set this bar button item as the right item in the navigationItem
 //        [[self navigationItem] setLeftBarButtonItem:bbi];
-        
+        // TODO: change this to initWithImage
         UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithTitle:@"Calculate" style:UIBarButtonItemStyleBordered target:self action:@selector(calculateAndShowResultView:)];
 
         [[self navigationItem] setRightBarButtonItem:btnCalculate animated:YES];
@@ -39,6 +39,7 @@
     return self;
 }
 
+// To determine whether the Calculate button should be enabled
 - (void)shouldBtnCalculateEnabled
 {
     UIBarButtonItem *btnCalculate = [[self navigationItem] rightBarButtonItem];
@@ -70,17 +71,17 @@
             MTResultItem *ri = [[MTResultItem alloc] init];
             [[ri personalEntries] addObject:p];
             [[MTResultItemStore defaultStore] addResultItem:ri];
-            NSLog(@"%@", [p description]);            
+            NSLog(@"%@", [p description]);
         }
     }
-    
+
     [[MTResultItemStore defaultStore] setSumOfPeople:[[MTEntryItemStore defaultStore] sumOfPeople]];
     [[MTResultItemStore defaultStore] setSumOfAllEntries:[[MTEntryItemStore defaultStore] sumOfAllEntries]];
     [[MTResultItemStore defaultStore] setSumOfAllSharedEntries:[[MTEntryItemStore defaultStore] sumOfAllSharedEntries]];
     [[MTResultItemStore defaultStore] setTotalTip:[[MTEntryItemStore defaultStore] sumOfAllEntries]*tipPercent];
     [[MTResultItemStore defaultStore] setTotalTax:totalTax];
     [[MTResultItemStore defaultStore] setTipPercent:tipPercent];
-    
+
     MTResultsViewController *rvc = [[MTResultsViewController alloc] initWithNibName:@"MTResultsViewController" bundle:nil];
     [[self navigationController] pushViewController:rvc animated:YES];
 }
@@ -106,6 +107,12 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
     MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryAmountInDollar] becomeFirstResponder];
+    [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
+    [ICFormatControl formatUITextField:[cell entryForName]];
+    //TODO: set entryAmountInDollar delegate to self
+    cell.entryAmountInDollar.delegate = self;
+    [[cell entryForName] setKeyboardType:UIKeyboardTypeAlphabet];
+    [[cell centerButton] setImage:[UIImage imageNamed:@"user_male-128.png"] forState:UIControlStateNormal];
 }
 
 - (IBAction)addSharedEntry:(id)sender
@@ -119,7 +126,14 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
     MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryAmountInDollar] becomeFirstResponder];
+    [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
+    [ICFormatControl formatUITextField:[cell entryForName]];
+    //TODO: set entryAmountInDollar delegate to self
+    cell.entryAmountInDollar.delegate = self;
+    [[cell entryForName] setKeyboardType:UIKeyboardTypeAlphabet];
+    [[cell centerButton] setImage:[UIImage imageNamed:@"group-128.png"] forState:UIControlStateNormal];
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -128,10 +142,10 @@
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap)];
     [doubleTap setNumberOfTapsRequired:2];
     [self.view addGestureRecognizer:doubleTap];
-    
+
     // setup custom UINavigation titleView
     [ICFormatControl setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"PARTY"];
-    
+
     // Load Custom cell nib file
     UINib *nib = [UINib nibWithNibName:@"MTEntryTableViewCell" bundle:nil];
     // Register this NIB which contains the cell
@@ -197,17 +211,15 @@
     [[cell entryForName] setText:[p entryForName]];
     [[cell entryAmountInDollar] setText:[p entryAmountInDollar]];
     [cell setIsSharedEntry:p.isSharedEntry];
-    
+
     if (p.isInvisible) {
         [[cell entryAmountInDollar] setHidden:YES];
         [[cell entryForName] setHidden:YES];
-        [[cell dollarLabel] setHidden:YES];
         [[cell centerButton] setHidden:YES];
 //        [[cell imageView] setHidden:YES];
     }else{
         [[cell entryAmountInDollar] setHidden:NO];
         [[cell entryForName] setHidden:NO];
-        [[cell dollarLabel] setHidden:NO];
         [[cell centerButton] setHidden:NO];
     }
 
@@ -241,7 +253,7 @@
         MTEntryItemStore *store = [MTEntryItemStore defaultStore];
         MTEntryItem *p = [[store allEntries] objectAtIndex:[indexPath row]];
         [store removeEntry:p];
-        
+
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
         NSLog(@"Deleted row %d from tableView", [indexPath row]);
     }
@@ -279,7 +291,7 @@
     [self shouldBtnCalculateEnabled];
     [self updateGrandTotal];
     NSLog(@"%@", [MTEntryItemStore description]);
-    
+
     [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
@@ -287,10 +299,10 @@
 {
     NSLog(@"textFieldDidBeginEditing tag: %d", textField.tag);
 
-    
+
     // get textField's cell's index path
     NSIndexPath *indexPath = [self.entryTableView indexPathForCell:(MTEntryTableViewCell *)[[textField superview] superview]];
-    
+
     [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
@@ -298,9 +310,9 @@
 {
     double tipPercent = [[[self tipLabel] text] doubleValue]/100;
     double totalTax = [[ICFormatControl getFromUITextField:taxTextField] doubleValue];
-    
+
     double grandTotal = [[MTEntryItemStore defaultStore] sumOfAllEntries]*(1+tipPercent) + totalTax;
-    
+
     [[self grandTotalLabel] setText:[NSString stringWithFormat:@"$%.2f", grandTotal]];
 }
 
@@ -319,6 +331,7 @@
     return YES;
 }
 
+// UITextField delegate override: change currency UITextField text on the fly to comform with currency format: $00.00
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (textField == self.taxTextField) {
