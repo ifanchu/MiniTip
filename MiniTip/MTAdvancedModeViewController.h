@@ -22,6 +22,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *createSharedEntryButton;
 @property (strong, nonatomic) IBOutlet UIButton *createIndividualEntryButton;
 
+@property (nonatomic) NSIndexPath *editingIndexPath;
+
 
 - (IBAction)calculateAndShowResultView:(id)sender;
 - (IBAction)addPersonalEntry:(id)sender;

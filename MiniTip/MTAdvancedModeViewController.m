@@ -104,13 +104,14 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
 //    MTEntryItemStore *store = [MTEntryItemStore defaultStore];
     [[self entryTableView] reloadData];
     [self shouldBtnCalculateEnabled];
-    int idx = [[[MTEntryItemStore defaultStore] allEntries] count] - 10 - 1;
+    int idx = [[[MTEntryItemStore defaultStore] allEntries] count] - 1;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
     MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryForName] becomeFirstResponder];
-    [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
-    [ICFormatControl formatUITextField:[cell entryForName]];
+//    [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
+//    [ICFormatControl formatUITextField:[cell entryForName]];
     cell.entryAmountInDollar.delegate = self;
+    cell.entryForName.textAlignment = NSTextAlignmentLeft;
     [[cell entryForName] setKeyboardType:UIKeyboardTypeAlphabet];
     [[cell centerButton] setImage:[UIImage imageNamed:@"user_male-128.png"] forState:UIControlStateNormal];
 }
@@ -122,12 +123,12 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
     [[MTEntryItemStore defaultStore] createSharedEntry];
     [[self entryTableView] reloadData];
     [self shouldBtnCalculateEnabled];
-    int idx = [[[MTEntryItemStore defaultStore] allEntries] count] - 10 - 1;
+    int idx = [[[MTEntryItemStore defaultStore] allEntries] count] - 1;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
     MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryAmountInDollar] becomeFirstResponder];
-    [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
-    [ICFormatControl formatUITextField:[cell entryForName]];
+//    [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
+//    [ICFormatControl formatUITextField:[cell entryForName]];
     cell.entryAmountInDollar.delegate = self;
     [[cell entryForName] setKeyboardType:UIKeyboardTypeAlphabet];
     [[cell centerButton] setImage:[UIImage imageNamed:@"group-128.png"] forState:UIControlStateNormal];
@@ -136,11 +137,14 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // register keyboard notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap)];
-    [doubleTap setNumberOfTapsRequired:2];
-    [self.view addGestureRecognizer:doubleTap];
+//    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap)];
+//    [doubleTap setNumberOfTapsRequired:2];
+//    [self.view addGestureRecognizer:doubleTap];
 
     // setup custom UINavigation titleView
     [ICFormatControl setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"PARTY"];
@@ -210,19 +214,9 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
     [[cell entryForName] setDelegate:self];
     // Configure the cell with EntryItem
     [[cell entryForName] setText:[p entryForName]];
-    [[cell entryAmountInDollar] setText:[p entryAmountInDollar]];
+    NSString *prefix = ([[p entryAmountInDollar] length] == 0 ? @"" : @"$");
+    [[cell entryAmountInDollar] setText:[NSString stringWithFormat:@"%@%@", prefix, [p entryAmountInDollar]]];
     [cell setIsSharedEntry:p.isSharedEntry];
-
-    if (p.isInvisible) {
-        [[cell entryAmountInDollar] setHidden:YES];
-        [[cell entryForName] setHidden:YES];
-        [[cell centerButton] setHidden:YES];
-//        [[cell imageView] setHidden:YES];
-    }else{
-        [[cell entryAmountInDollar] setHidden:NO];
-        [[cell entryForName] setHidden:NO];
-        [[cell centerButton] setHidden:NO];
-    }
 
     return cell;
 }
@@ -308,6 +302,7 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
 
     // get textField's cell's index path
     NSIndexPath *indexPath = [self.entryTableView indexPathForCell:[ICFormatControl getCellFromTextField:textField]];
+    self.editingIndexPath = indexPath;
 
     [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 
@@ -352,6 +347,40 @@ int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
         return [ICFormatControl textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
     }
     return YES;
+}
+
+// format UITextField here before the cells got displayed
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"TableView will display cell %ld", (long)indexPath.row);
+    
+    if ([cell isKindOfClass:[MTEntryTableViewCell class]]) {
+        MTEntryTableViewCell *thisCell = (MTEntryTableViewCell *)cell;
+        [ICFormatControl formatUITextField:thisCell.entryForName];
+        [ICFormatControl formatUITextField:thisCell.entryAmountInDollar];
+        thisCell.entryForName.textAlignment = NSTextAlignmentLeft;
+        thisCell.entryForName.keyboardType = UIKeyboardTypeNamePhonePad;
+    }
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // This app only runs in Portrait mode
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height), 0.0);
+    
+    self.entryTableView.contentInset = contentInsets;
+    self.entryTableView.scrollIndicatorInsets = contentInsets;
+    [self.entryTableView scrollToRowAtIndexPath:self.editingIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    UIEdgeInsets edge = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.entryTableView.scrollIndicatorInsets = edge;
+    self.entryTableView.contentInset = edge;
 }
 
 @end

@@ -11,7 +11,7 @@
 #import "MTResultItemStore.h"
 
 @implementation MTEntryItemStore
-int const NUMBER_OF_INVISIBLE_CELL = 10;
+//int const NUMBER_OF_INVISIBLE_CELL = 10;
 
 + (MTEntryItemStore *)defaultStore
 {
@@ -32,9 +32,9 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
 {
     [entries removeAllObjects];
     [sharedEntries removeAllObjects];
-    for (int i=0; i < NUMBER_OF_INVISIBLE_CELL; i++) {
-        [entries addObject:[MTEntryItem getInvisibleEntry]];
-    }
+//    for (int i=0; i < NUMBER_OF_INVISIBLE_CELL; i++) {
+//        [entries addObject:[MTEntryItem getInvisibleEntry]];
+//    }
 }
 
 - (id)init
@@ -43,11 +43,11 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
     if (self) {
         if (!entries){
             entries = [[NSMutableArray alloc] init];
-            for (int i=0; i < NUMBER_OF_INVISIBLE_CELL; i++) {
-                // add 10 invisible entries to entries array
-                // this is to implement the scrolling feature
-                [entries addObject:[MTEntryItem getInvisibleEntry]];
-            }
+//            for (int i=0; i < NUMBER_OF_INVISIBLE_CELL; i++) {
+//                // add 10 invisible entries to entries array
+//                // this is to implement the scrolling feature
+//                [entries addObject:[MTEntryItem getInvisibleEntry]];
+//            }
         }
         if(!sharedEntries)
             sharedEntries = [[NSMutableArray alloc] init];
@@ -87,7 +87,7 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
 - (MTEntryItem *)createPersonalEntry
 {
     MTEntryItem *p = [MTEntryItem getEmptyPersonalEntry];
-    int insertLoc = [entries count] - NUMBER_OF_INVISIBLE_CELL;
+    int insertLoc = [entries count];
     [entries insertObject:p atIndex:insertLoc];
     
     return p;
@@ -97,7 +97,7 @@ int const NUMBER_OF_INVISIBLE_CELL = 10;
 {
     MTEntryItem *p = [MTEntryItem getEmptySharedEntry];
     [sharedEntries addObject:p];
-    int insertLoc = [entries count] - NUMBER_OF_INVISIBLE_CELL;
+    int insertLoc = [entries count];
     [entries insertObject:p atIndex:insertLoc];
     
     return p;
