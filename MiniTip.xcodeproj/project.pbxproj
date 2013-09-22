@@ -79,8 +79,8 @@
 		0516D85D17EAE8C4006052FF /* AppIcon57x57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AppIcon57x57@2x.png"; path = "icons/AppIcon57x57@2x.png"; sourceTree = SOURCE_ROOT; };
 		0516D86417EAF3C1006052FF /* launchimage_640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launchimage_640x960.png; path = Resources/images/launchimage_640x960.png; sourceTree = SOURCE_ROOT; };
 		0516D86817EAF40F006052FF /* launchimage_640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launchimage_640x1136.png; path = Resources/images/launchimage_640x1136.png; sourceTree = SOURCE_ROOT; };
-		0516D86B17EB4D72006052FF /* tree_bark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree_bark.png; sourceTree = "<group>"; };
-		0516D86D17EB4EC4006052FF /* paper_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paper_3.png; sourceTree = "<group>"; };
+		0516D86B17EB4D72006052FF /* tree_bark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tree_bark.png; path = Resources/textures/tree_bark.png; sourceTree = "<group>"; };
+		0516D86D17EB4EC4006052FF /* paper_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = paper_3.png; path = Resources/textures/paper_3.png; sourceTree = "<group>"; };
 		0516D88D17EBFA00006052FF /* bill-35.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bill-35.png"; path = "Resources/icons/bill-35.png"; sourceTree = SOURCE_ROOT; };
 		0516D88F17EBFF8E006052FF /* money-35.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "money-35.png"; path = "Resources/icons/money-35.png"; sourceTree = SOURCE_ROOT; };
 		0516D89517EC040A006052FF /* group-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "group-128.png"; path = "Resources/icons/group-128.png"; sourceTree = SOURCE_ROOT; };
@@ -99,7 +99,7 @@
 		0516D8B217ED5A78006052FF /* math-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "math-128.png"; path = "Resources/icons/math-128.png"; sourceTree = SOURCE_ROOT; };
 		051D8A0B17EA0470004273EE /* ICFormatControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormatControl.h; sourceTree = "<group>"; };
 		051D8A0C17EA0470004273EE /* ICFormatControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormatControl.m; sourceTree = "<group>"; };
-		055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
+		055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Lig.ttf"; path = "Resources/Fonts/Lato-Lig.ttf"; sourceTree = "<group>"; };
 		056936CE16673F7D00091D92 /* MTAdvancedModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAdvancedModeViewController.h; sourceTree = "<group>"; };
 		056936CF16673F7D00091D92 /* MTAdvancedModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTAdvancedModeViewController.m; sourceTree = "<group>"; };
 		056936D016673F7D00091D92 /* MTAdvancedModeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTAdvancedModeViewController.xib; sourceTree = "<group>"; };
