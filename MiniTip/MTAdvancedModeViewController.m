@@ -328,7 +328,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     self.currentKBType = textField.keyboardType;
     if (textField.keyboardType == UIKeyboardTypeNumberPad && !self.isDoneButtonDisplayed) {
         [self addDoneButtonToKeyboard];
-    }else{
+    }else if (textField.keyboardType != UIKeyboardTypeNumberPad){
         [self removeDoneButtonFromKeyboard];
     }
     

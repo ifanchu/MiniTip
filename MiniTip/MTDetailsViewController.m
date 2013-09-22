@@ -232,19 +232,19 @@ int const SECTION_SUBTOTAL = 4;
     UILabel *aLabel = [[UILabel alloc] init];
     switch (section) {
         case SECTION_PERSONAL_ENTRIES:
-            aLabel.text = [[NSString stringWithFormat:@"%@'s Entries", self.resultItem.getName] uppercaseString];
+            aLabel.text = [[NSString stringWithFormat:@"  %@'s Entries", self.resultItem.getName] uppercaseString];
             break;
         case SECTION_SHARED_ENTRIES:
             aLabel.text = [@"Shared Entries" uppercaseString];
             break;
         case SECTION_TIP:
-            aLabel.text = [[NSString stringWithFormat:@"Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]] uppercaseString];
+            aLabel.text = [[NSString stringWithFormat:@"  Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]] uppercaseString];
             break;
         case SECTION_TAX:
-            aLabel.text = [[NSString stringWithFormat:@"Total Tax: $%.2f", [[MTResultItemStore defaultStore] totalTax]] uppercaseString];
+            aLabel.text = [[NSString stringWithFormat:@"  Total Tax: $%.2f", [[MTResultItemStore defaultStore] totalTax]] uppercaseString];
             break;
         case SECTION_SUBTOTAL:
-            aLabel.text = [@"Subtotal" uppercaseString];
+            aLabel.text = [@"  Subtotal" uppercaseString];
             break;
         default:
             break;

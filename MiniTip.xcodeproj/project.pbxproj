@@ -29,14 +29,12 @@
 		0516D89717EC040A006052FF /* group-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89517EC040A006052FF /* group-128.png */; };
 		0516D89817EC040A006052FF /* waiter-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89617EC040A006052FF /* waiter-128.png */; };
 		0516D89B17EC0757006052FF /* card_in_use-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89917EC0757006052FF /* card_in_use-128.png */; };
-		0516D89C17EC0757006052FF /* user_male-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89A17EC0757006052FF /* user_male-128.png */; };
 		0516D89E17EC0C7E006052FF /* info-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89D17EC0C7E006052FF /* info-128.png */; };
 		0516D8A017EC2680006052FF /* up-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D89F17EC2680006052FF /* up-128.png */; };
 		0516D8A317EC3529006052FF /* aligndown-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8A117EC3529006052FF /* aligndown-60.png */; };
 		0516D8A417EC3529006052FF /* aligntop-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8A217EC3529006052FF /* aligntop-60.png */; };
 		0516D8A817EC36CD006052FF /* minus-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8A717EC36CD006052FF /* minus-40.png */; };
 		0516D8AA17EC3B60006052FF /* user_male-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8A917EC3B60006052FF /* user_male-128.png */; };
-		0516D8AC17EC3D2D006052FF /* group-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8AB17EC3D2D006052FF /* group-128.png */; };
 		0516D8AF17ED3A68006052FF /* plus_group.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8AD17ED3A68006052FF /* plus_group.png */; };
 		0516D8B017ED3A68006052FF /* plus_individual.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8AE17ED3A68006052FF /* plus_individual.png */; };
 		0516D8B317ED5A78006052FF /* math-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0516D8B217ED5A78006052FF /* math-128.png */; };
@@ -380,7 +378,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = UT;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "IFAN CHU";
 				TargetAttributes = {
 					058D114916644D5F00C003C3 = {
@@ -425,7 +423,6 @@
 				0516D8A817EC36CD006052FF /* minus-40.png in Resources */,
 				0516D85417EAE7E8006052FF /* AppIcon40x40.png in Resources */,
 				0516D8AA17EC3B60006052FF /* user_male-128.png in Resources */,
-				0516D8AC17EC3D2D006052FF /* group-128.png in Resources */,
 				0516D8AF17ED3A68006052FF /* plus_group.png in Resources */,
 				0516D8A417EC3529006052FF /* aligntop-60.png in Resources */,
 				0516D8B317ED5A78006052FF /* math-128.png in Resources */,
@@ -438,7 +435,6 @@
 				0516D88E17EBFA00006052FF /* bill-35.png in Resources */,
 				0516D8A017EC2680006052FF /* up-128.png in Resources */,
 				0516D89E17EC0C7E006052FF /* info-128.png in Resources */,
-				0516D89C17EC0757006052FF /* user_male-128.png in Resources */,
 				0516D89017EBFF8E006052FF /* money-35.png in Resources */,
 				0516D85817EAE7E8006052FF /* AppIcon76x76.png in Resources */,
 				056936F216687A2900091D92 /* MTResultsViewController.xib in Resources */,

@@ -24,7 +24,6 @@
     label.font = [ICFormatControl getLatoFont:label.font.pointSize];
     label.textColor = [ICFormatControl getCustomColorBlue];
     label.minimumScaleFactor = 0.5;
-    label.minimumFontSize = 10;
 }
 
 + (void)formatUITextField:(UITextField *)textField
