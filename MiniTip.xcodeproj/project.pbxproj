@@ -22,6 +22,8 @@
 		056936F616687A9C00091D92 /* MTDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056936F416687A9C00091D92 /* MTDetailsViewController.m */; };
 		056936F716687A9C00091D92 /* MTDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 056936F516687A9C00091D92 /* MTDetailsViewController.xib */; };
 		0584D74617EEEFEB00F5B829 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0584D74517EEEFEB00F5B829 /* Images.xcassets */; };
+		0584D74D17EF4E6900F5B829 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0584D74A17EF4E6900F5B829 /* ECSlidingViewController.m */; };
+		0584D74E17EF4E6900F5B829 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0584D74C17EF4E6900F5B829 /* UIImage+ImageWithUIView.m */; };
 		058D114F16644D5F00C003C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 058D114E16644D5F00C003C3 /* UIKit.framework */; };
 		058D115116644D5F00C003C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 058D115016644D5F00C003C3 /* Foundation.framework */; };
 		058D115316644D5F00C003C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 058D115216644D5F00C003C3 /* CoreGraphics.framework */; };
@@ -60,6 +62,10 @@
 		056936F416687A9C00091D92 /* MTDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDetailsViewController.m; sourceTree = "<group>"; };
 		056936F516687A9C00091D92 /* MTDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTDetailsViewController.xib; sourceTree = "<group>"; };
 		0584D74517EEEFEB00F5B829 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0584D74917EF4E6900F5B829 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
+		0584D74A17EF4E6900F5B829 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		0584D74B17EF4E6900F5B829 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		0584D74C17EF4E6900F5B829 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
 		058D114A16644D5F00C003C3 /* MiniTip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniTip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		058D114E16644D5F00C003C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		058D115016644D5F00C003C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -177,9 +183,30 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0584D74717EF4E4F00F5B829 /* thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				0584D74817EF4E6900F5B829 /* ECSlidingViewController */,
+			);
+			name = thirdparty;
+			sourceTree = "<group>";
+		};
+		0584D74817EF4E6900F5B829 /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0584D74917EF4E6900F5B829 /* ECSlidingViewController.h */,
+				0584D74A17EF4E6900F5B829 /* ECSlidingViewController.m */,
+				0584D74B17EF4E6900F5B829 /* UIImage+ImageWithUIView.h */,
+				0584D74C17EF4E6900F5B829 /* UIImage+ImageWithUIView.m */,
+			);
+			name = ECSlidingViewController;
+			path = thirdparty/ECSlidingViewController;
+			sourceTree = "<group>";
+		};
 		058D113F16644D5F00C003C3 = {
 			isa = PBXGroup;
 			children = (
+				0584D74717EF4E4F00F5B829 /* thirdparty */,
 				055E8A0917E9FDCF009EA946 /* CustomHelpers */,
 				055E8A0517E9FBFE009EA946 /* Resources */,
 				056936ED1667541300091D92 /* Model */,
@@ -347,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0584D74E17EF4E6900F5B829 /* UIImage+ImageWithUIView.m in Sources */,
 				058D115B16644D5F00C003C3 /* main.m in Sources */,
 				058D117A16644E0C00C003C3 /* UTAppDelegate.m in Sources */,
 				058D117D16644E1500C003C3 /* UTViewController.m in Sources */,
@@ -356,6 +384,7 @@
 				056936E3166753E900091D92 /* MTEntryItem.m in Sources */,
 				056936E6166753F500091D92 /* MTEntryItemStore.m in Sources */,
 				056936E91667540200091D92 /* MTResultItem.m in Sources */,
+				0584D74D17EF4E6900F5B829 /* ECSlidingViewController.m in Sources */,
 				056936EC1667540E00091D92 /* MTResultItemStore.m in Sources */,
 				056936F116687A2900091D92 /* MTResultsViewController.m in Sources */,
 				056936F616687A9C00091D92 /* MTDetailsViewController.m in Sources */,

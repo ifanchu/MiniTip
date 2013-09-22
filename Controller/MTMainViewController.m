@@ -36,6 +36,8 @@
     
     [ICFormatHelper formatUIButton:self.basicButton];
     [ICFormatHelper formatUIButton:self.partyButton];
+    [ICFormatHelper formatUILabel:self.basicLabel];
+    [ICFormatHelper formatUILabel:self.partyLabel];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     NSLog(@"MTMain viewDidLoad");
 }

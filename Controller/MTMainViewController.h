@@ -18,4 +18,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *basicButton;
 @property (strong, nonatomic) IBOutlet UIButton *partyButton;
 @property (strong, nonatomic) IBOutlet UIButton *showInfoButton;
+@property (strong, nonatomic) IBOutlet UILabel *basicLabel;
+@property (strong, nonatomic) IBOutlet UILabel *partyLabel;
 @end
