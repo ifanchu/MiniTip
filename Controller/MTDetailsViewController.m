@@ -11,7 +11,7 @@
 #import "MTEntryItemStore.h"
 #import "MTResultItemStore.h"
 #import "MTEntryItem.h"
-#import "ICFormatControl.h"
+#import "ICFormatHelper.h"
 
 @interface MTDetailsViewController ()
 
@@ -38,9 +38,9 @@ int const SECTION_SUBTOTAL = 4;
     
     UINavigationItem *p = [self navigationItem];
 //    [p setTitle:[NSString stringWithFormat:@"%@'s breakdown", [[self resultItem] getName]]];
-    [ICFormatControl setupCustomNavigationItemTitleView:p withCustomText:@"BREAKDOWN"];
+    [ICFormatHelper setupCustomNavigationItemTitleView:p withCustomText:@"BREAKDOWN"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.view.backgroundColor = [ICFormatControl getBackgroundColor];
+    self.view.backgroundColor = [ICFormatHelper getBackgroundColor];
     
 }
 
@@ -223,8 +223,8 @@ int const SECTION_SUBTOTAL = 4;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [ICFormatControl formatUILabel:cell.textLabel];
-    [ICFormatControl formatUILabel:cell.detailTextLabel];
+    [ICFormatHelper formatUILabel:cell.textLabel];
+    [ICFormatHelper formatUILabel:cell.detailTextLabel];
 }
 // create a UILabel, format it and assign it to header
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -249,7 +249,7 @@ int const SECTION_SUBTOTAL = 4;
         default:
             break;
     }
-    [ICFormatControl formatUILabel:aLabel];
+    [ICFormatHelper formatUILabel:aLabel];
     return aLabel;
 }
 

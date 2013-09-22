@@ -7,7 +7,7 @@
 //
 
 #import "UTViewController.h"
-#import "ICFormatControl.h"
+#import "ICFormatHelper.h"
 
 @interface UTViewController ()
 
@@ -25,7 +25,7 @@ int const TAG_FOR_TAX_AMOUNT=1;
 //    UINavigationItem *p = [self navigationItem];
 //    [p setTitle:@"BASIC"];
     // setup custom UINavigation titleView
-    [ICFormatControl setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"BASIC"];
+    [ICFormatHelper setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"BASIC"];
     
 	// Do any additional setup after loading the view, typically from a nib.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -39,17 +39,17 @@ int const TAG_FOR_TAX_AMOUNT=1;
     // UI Setting
     billAmountTextField.tag = TAG_FOR_BILL_AMOUNT;
     taxAmountTextField.tag = TAG_FOR_TAX_AMOUNT;
-    [ICFormatControl formatUITextField:self.billAmountTextField withLeftVIewImage:@"bill-35.png"];
-    [ICFormatControl formatUITextField:[self taxAmountTextField] withLeftVIewImage:@"money-35.png"];
+    [ICFormatHelper formatUITextField:self.billAmountTextField withLeftVIewImage:@"bill-35.png"];
+    [ICFormatHelper formatUITextField:[self taxAmountTextField] withLeftVIewImage:@"money-35.png"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    [ICFormatControl formatUILabel:self.peopleLabel];
-    [ICFormatControl formatUILabel:self.tipLabel];
-    [ICFormatControl formatUILabel:self.grandTotalLabel];
-    [ICFormatControl formatUILabel:self.splitAmountLabel];
-    [ICFormatControl formatUILabel:self.totalTipLabel];
-    [ICFormatControl formatUILabel:self.totalLabel];
-    [ICFormatControl formatUILabel:self.taxLabel];
-    self.view.backgroundColor = [ICFormatControl getBackgroundColor];
+    [ICFormatHelper formatUILabel:self.peopleLabel];
+    [ICFormatHelper formatUILabel:self.tipLabel];
+    [ICFormatHelper formatUILabel:self.grandTotalLabel];
+    [ICFormatHelper formatUILabel:self.splitAmountLabel];
+    [ICFormatHelper formatUILabel:self.totalTipLabel];
+    [ICFormatHelper formatUILabel:self.totalLabel];
+    [ICFormatHelper formatUILabel:self.taxLabel];
+    self.view.backgroundColor = [ICFormatHelper getBackgroundColor];
     [self.myScrollView addSubview:self.contentView];
     self.myScrollView.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
@@ -108,14 +108,14 @@ int const TAG_FOR_TAX_AMOUNT=1;
 
 - (void)calculate
 {
-    double bill = [[ICFormatControl getFromUITextField:billAmountTextField] doubleValue];
-    double tax = [[ICFormatControl getFromUITextField:taxAmountTextField] doubleValue];
+    double bill = [[ICFormatHelper getFromUITextField:billAmountTextField] doubleValue];
+    double tax = [[ICFormatHelper getFromUITextField:taxAmountTextField] doubleValue];
     double preTax = bill - tax;
     //It doesn't make sense if tax > bill * 0.2
     if (tax > bill * 0.2) {
         taxAmountTextField.textColor = [UIColor redColor];
     }else{
-        taxAmountTextField.textColor = [ICFormatControl getCustomColorBlue];
+        taxAmountTextField.textColor = [ICFormatHelper getCustomColorBlue];
     }
     // 0: no modify, 1: round up, 2: round down
     int selectedEasySplitMode = [[self easySplitSegmentedControl] selectedSegmentIndex];
@@ -164,7 +164,7 @@ int const TAG_FOR_TAX_AMOUNT=1;
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-    return [ICFormatControl textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
+    return [ICFormatHelper textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

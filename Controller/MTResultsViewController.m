@@ -10,7 +10,7 @@
 #import "MTResultItemStore.h"
 #import "MTResultItem.h"
 #import "MTDetailsViewController.h"
-#import "ICFormatControl.h"
+#import "ICFormatHelper.h"
 
 @interface MTResultsViewController ()
 
@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     UINavigationItem *p = [self navigationItem];
-    [ICFormatControl setupCustomNavigationItemTitleView:p withCustomText:@"EACH PAYS"];
+    [ICFormatHelper setupCustomNavigationItemTitleView:p withCustomText:@"EACH PAYS"];
     self.edgesForExtendedLayout = UIRectEdgeNone;    
 }
 
@@ -78,8 +78,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [ICFormatControl formatUILabel:cell.textLabel];
-    [ICFormatControl formatUILabel:cell.detailTextLabel];
+    [ICFormatHelper formatUILabel:cell.textLabel];
+    [ICFormatHelper formatUILabel:cell.detailTextLabel];
 }
 
 @end

@@ -11,7 +11,7 @@
 #import "MTAdvancedModeViewController.h"
 #import "MTResultItemStore.h"
 #import "MTEntryItemStore.h"
-#import "ICFormatControl.h"
+#import "ICFormatHelper.h"
 
 @interface MTMainViewController ()
 
@@ -34,15 +34,15 @@
     UINavigationItem *p = [self navigationItem];
     [p setTitle:@"MiniTip"];
     
-    [ICFormatControl formatUIButton:self.basicButton];
-    [ICFormatControl formatUIButton:self.partyButton];
+    [ICFormatHelper formatUIButton:self.basicButton];
+    [ICFormatHelper formatUIButton:self.partyButton];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     NSLog(@"MTMain viewDidLoad");
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    return [ICFormatControl textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
+    return [ICFormatHelper textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
 }
 
 - (void)viewDidAppear:(BOOL)animated

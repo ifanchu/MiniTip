@@ -10,7 +10,7 @@
 
 #import "UTViewController.h"
 #import "MTMainViewController.h"
-#import "ICFormatControl.h"
+#import "ICFormatHelper.h"
 
 @implementation UTAppDelegate
 
@@ -24,7 +24,7 @@
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     // set window background imge, then set each view background to clear
-    self.window.backgroundColor = [ICFormatControl getBackgroundColor];
+    self.window.backgroundColor = [ICFormatHelper getBackgroundColor];
     [self.window setFrame:[[UIScreen mainScreen] bounds]];
     return YES;
 }

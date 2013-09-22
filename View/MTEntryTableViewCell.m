@@ -7,7 +7,7 @@
 //
 
 #import "MTEntryTableViewCell.h"
-#import "ICFormatControl.h"
+#import "ICFormatHelper.h"
 
 @implementation MTEntryTableViewCell
 @synthesize entryAmountInDollar, entryForName, isSharedEntry;
@@ -20,7 +20,7 @@
     [[cell entryForName] setText:@""];
     [[cell entryForName] setEnabled:YES];
     cell.isSharedEntry = NO;
-    [cell.iconButton setImage:[ICFormatControl getPersonalImage] forState:UIControlStateNormal];
+    [cell.iconButton setImage:[ICFormatHelper getPersonalImage] forState:UIControlStateNormal];
     return cell;
 }
 
@@ -32,7 +32,7 @@
     [[cell entryForName] setText:@""];
     [[cell entryForName] setEnabled:NO];
     cell.isSharedEntry = YES;
-    [cell.iconButton setImage:[ICFormatControl getGroupImage] forState:UIControlStateNormal];
+    [cell.iconButton setImage:[ICFormatHelper getGroupImage] forState:UIControlStateNormal];
     return cell;
 }
 

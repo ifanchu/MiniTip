@@ -6,23 +6,23 @@
 //  Copyright (c) 2013 IFAN CHU. All rights reserved.
 //
 
-#import "ICFormatControl.h"
+#import "ICFormatHelper.h"
 #import <QuartzCore/QuartzCore.h>
 #import "MTEntryTableViewCell.h"
 
-@implementation ICFormatControl
+@implementation ICFormatHelper
 
 + (void)formatUIButton:(UIButton *)button
 {
-    [ICFormatControl formatUILabel:button.titleLabel];
+    [ICFormatHelper formatUILabel:button.titleLabel];
     button.backgroundColor = [UIColor clearColor];
 }
 
 + (void)formatUILabel:(UILabel *)label
 {
 //    [label setFont: [ICFormatControl getLatoFont:label.font.pointSize]];
-    label.font = [ICFormatControl getLatoFont:label.font.pointSize];
-    label.textColor = [ICFormatControl getCustomColorBlue];
+    label.font = [ICFormatHelper getLatoFont:label.font.pointSize];
+    label.textColor = [ICFormatHelper getCustomColorBlue];
     label.minimumScaleFactor = 0.5;
 }
 
@@ -34,16 +34,16 @@
     textField.layer.cornerRadius = 8.0f;
     textField.layer.masksToBounds = YES;
     textField.layer.borderWidth = 0.5f;
-    textField.layer.borderColor = [[ICFormatControl getCustomColorBlue] CGColor];
+    textField.layer.borderColor = [[ICFormatHelper getCustomColorBlue] CGColor];
     CGRect frameRect = textField.frame;
     textField.layer.borderColor = [[UIColor clearColor] CGColor];
     frameRect.size.height = 40;
 //    frameRect.size.width = 230;
     textField.frame = frameRect;
     textField.keyboardType = UIKeyboardTypeNumberPad;
-    textField.font = [ICFormatControl getLatoFont:textField.font.pointSize];
+    textField.font = [ICFormatHelper getLatoFont:textField.font.pointSize];
 //    [textField setFont: [ICFormatControl getLatoFont:textField.font.pointSize]];
-        textField.textColor = [ICFormatControl getCustomColorBlue];
+        textField.textColor = [ICFormatHelper getCustomColorBlue];
 //    textField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
 
 }
@@ -55,7 +55,7 @@
 
 + (void)formatUITextField:(UITextField *)textField withLeftVIewImage:(NSString *)leftViewImageName
 {
-    [ICFormatControl formatUITextField:textField];
+    [ICFormatHelper formatUITextField:textField];
     [textField setLeftView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:leftViewImageName]]];
     [textField setLeftViewMode:UITextFieldViewModeAlways];
 }
@@ -90,7 +90,7 @@
     CGRect frame = CGRectMake(0, 0, 400, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.font = [UIFont boldSystemFontOfSize:30.0];
-    [ICFormatControl formatUILabel:label];
+    [ICFormatHelper formatUILabel:label];
     label.text = text;
     navigationItem.titleView = label;
 }

@@ -13,7 +13,7 @@
 #import "MTResultsViewController.h"
 #import "MTResultItemStore.h"
 #import "MTResultItem.h"
-#import "ICFormatControl.h"
+#import "ICFormatHelper.h"
 
 @interface MTAdvancedModeViewController ()
 
@@ -56,7 +56,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     NSLog(@"Pressed Calculate");
     [self dismissKeyboard];
     double tipPercent = [[[self tipLabel] text] doubleValue]/100;
-    double totalTax = [[ICFormatControl getFromUITextField:self.taxTextField] doubleValue];
+    double totalTax = [[ICFormatHelper getFromUITextField:self.taxTextField] doubleValue];
 
     for (MTEntryItem *p in [[MTEntryItemStore defaultStore] allEntries]) {
         if (p.isSharedEntry)
@@ -103,7 +103,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     // TASK: do not add any entry if the last entry amountInDollor is empty
     // get last entry
     MTEntryTableViewCell *aCell = (MTEntryTableViewCell *)[self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.entryTableView numberOfRowsInSection:0]-1 inSection:0]];
-    if (aCell != nil && [ICFormatControl getFromUITextField:aCell.entryAmountInDollar].length == 0) {
+    if (aCell != nil && [ICFormatHelper getFromUITextField:aCell.entryAmountInDollar].length == 0) {
         return;
     }
     //END TASK
@@ -127,7 +127,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     // TASK: do not add any entry if the last entry amountInDollor is empty
     // get last entry
     MTEntryTableViewCell *aCell = (MTEntryTableViewCell *)[self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.entryTableView numberOfRowsInSection:0]-1 inSection:0]];
-    if (aCell != nil && [ICFormatControl getFromUITextField:aCell.entryAmountInDollar].length == 0) {
+    if (aCell != nil && [ICFormatHelper getFromUITextField:aCell.entryAmountInDollar].length == 0) {
         return;
     }
     // END TASK
@@ -160,7 +160,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [self.view addGestureRecognizer:doubleTap];
 
     // setup custom UINavigation titleView
-    [ICFormatControl setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"PARTY"];
+    [ICFormatHelper setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"PARTY"];
 
     // Load Custom cell nib file
     UINib *nib = [UINib nibWithNibName:@"MTEntryTableViewCell" bundle:nil];
@@ -168,17 +168,17 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [[self entryTableView] registerNib:nib forCellReuseIdentifier:@"MTEntryTableViewCell"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     // ui settings
-    [ICFormatControl formatUILabel:self.tipLabel];
-    [ICFormatControl formatUILabel:self.grandTotalLabel];
-    [ICFormatControl formatUITextField:self.taxTextField withLeftVIewImage:@"money-35.png"];
+    [ICFormatHelper formatUILabel:self.tipLabel];
+    [ICFormatHelper formatUILabel:self.grandTotalLabel];
+    [ICFormatHelper formatUITextField:self.taxTextField withLeftVIewImage:@"money-35.png"];
     taxTextField.tag = TAG_TAX_AMOUNT_UITEXTFIELD;
-    self.view.backgroundColor = [ICFormatControl getBackgroundColor];
-    self.entryTableView.backgroundColor = [ICFormatControl getBackgroundColor];
+    self.view.backgroundColor = [ICFormatHelper getBackgroundColor];
+    self.entryTableView.backgroundColor = [ICFormatHelper getBackgroundColor];
     self.createIndividualEntryButton.backgroundColor = [UIColor clearColor];
     self.createSharedEntryButton.backgroundColor = [UIColor clearColor];
     // buttons setup
-    [ICFormatControl formatUIButton:self.createIndividualEntryButton];
-    [ICFormatControl formatUIButton:self.createSharedEntryButton];
+    [ICFormatHelper formatUIButton:self.createIndividualEntryButton];
+    [ICFormatHelper formatUIButton:self.createSharedEntryButton];
     
     // add 1 entry to tableview first, at least 1 personal entry
     [self addPersonalEntry:nil];
@@ -278,7 +278,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // get textField's cell's index path
-    MTEntryTableViewCell *cell = [ICFormatControl getCellFromTextField:textField];
+    MTEntryTableViewCell *cell = [ICFormatHelper getCellFromTextField:textField];
     NSIndexPath *indexPath = [self.entryTableView indexPathForCell:cell];
     switch (textField.tag) {
         case TAG_ENTRY_AMOUNT_IN_DOLLAR:
@@ -286,7 +286,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
             NSLog(@"textFieldDidEndEditing for %@, IndexPath %d", @"entryAmountInDollar", [indexPath row]);
             // save entryAmountInDollar into MTEntryItem in IndexPath
             MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
-            p.entryAmountInDollar = [ICFormatControl getFromUITextField:textField];
+            p.entryAmountInDollar = [ICFormatHelper getFromUITextField:textField];
             break;
         }
         case TAG_ENTRY_FOR_NAME:
@@ -316,7 +316,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 
 
     // get textField's cell's index path
-    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:[ICFormatControl getCellFromTextField:textField]];
+    NSIndexPath *indexPath = [self.entryTableView indexPathForCell:[ICFormatHelper getCellFromTextField:textField]];
     self.editingIndexPath = indexPath;
 
     [[self entryTableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -339,7 +339,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 - (void)updateGrandTotal
 {
     double tipPercent = [[[self tipLabel] text] doubleValue]/100;
-    double totalTax = [[ICFormatControl getFromUITextField:taxTextField] doubleValue];
+    double totalTax = [[ICFormatHelper getFromUITextField:taxTextField] doubleValue];
 
     double grandTotal = [[MTEntryItemStore defaultStore] sumOfAllEntries]*(1+tipPercent) + totalTax;
 
@@ -352,7 +352,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
         case TAG_ENTRY_FOR_NAME:
         {
             // If name loses focus, move focus to amount
-            [[[ICFormatControl getCellFromTextField:textField] entryAmountInDollar] becomeFirstResponder];
+            [[[ICFormatHelper getCellFromTextField:textField] entryAmountInDollar] becomeFirstResponder];
             break;
         }
         case TAG_ENTRY_AMOUNT_IN_DOLLAR:
@@ -369,7 +369,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (textField == self.taxTextField || textField.tag == 0) {
-        return [ICFormatControl textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
+        return [ICFormatHelper textField:textField formatUITextFieldForCurrencyInDelegate:range replacementString:string];
     }
     return YES;
 }
@@ -381,8 +381,8 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     
     if ([cell isKindOfClass:[MTEntryTableViewCell class]]) {
         MTEntryTableViewCell *thisCell = (MTEntryTableViewCell *)cell;
-        [ICFormatControl formatUITextField:thisCell.entryForName];
-        [ICFormatControl formatUITextField:thisCell.entryAmountInDollar];
+        [ICFormatHelper formatUITextField:thisCell.entryForName];
+        [ICFormatHelper formatUITextField:thisCell.entryAmountInDollar];
         thisCell.entryForName.textAlignment = NSTextAlignmentLeft;
         thisCell.entryForName.keyboardType = UIKeyboardTypeNamePhonePad;
     }
