@@ -65,11 +65,11 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_in_use-128.png" id="HTW-HH-sBG">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_in_use-128" id="HTW-HH-sBG">
                     <rect key="frame" x="20" y="391" width="70" height="70"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiter-128.png" id="AIz-U8-Nrl">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiter-128" id="AIz-U8-Nrl">
                     <rect key="frame" x="20" y="5" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -100,7 +100,7 @@
         </view>
     </objects>
     <resources>
-        <image name="card_in_use-128.png" width="128" height="128"/>
-        <image name="waiter-128.png" width="128" height="128"/>
+        <image name="card_in_use-128" width="128" height="128"/>
+        <image name="waiter-128" width="128" height="128"/>
     </resources>
 </document>
