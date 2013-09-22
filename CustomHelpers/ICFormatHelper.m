@@ -98,7 +98,7 @@
 
 + (UIColor *)getBackgroundColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageNamed:@"paper_3.png"]];
+    return [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
 }
 
 + (void)setupCustomNavigationItemTitleView:(UINavigationItem *)navigationItem withCustomText:(NSString *)text
@@ -123,12 +123,12 @@
 
 + (UIImage *)getGroupImage
 {
-    return [UIImage imageNamed:@"group-128.png"];
+    return [UIImage imageNamed:@"group-128"];
 }
 
 + (UIImage *)getPersonalImage
 {
-    return [UIImage imageNamed:@"user_male-128.png"];
+    return [UIImage imageNamed:@"user_male-128"];
 }
 
 // code from http://stackoverflow.com/questions/5864383/ios-uibutton-with-multiple-labels
