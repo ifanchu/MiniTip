@@ -78,9 +78,4 @@
     [[self navigationController] pushViewController:advancedController animated:YES];
 }
 
-- (IBAction)showInfoPage:(id)sender
-{
-    //TODO: implement info page
-}
-
 @end
