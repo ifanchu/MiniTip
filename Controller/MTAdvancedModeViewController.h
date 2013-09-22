@@ -29,6 +29,7 @@
 @property (nonatomic,strong) UIButton *doneButton;
 @property (nonatomic) BOOL isDoneButtonDisplayed;
 
+@property (strong, nonatomic) IBOutlet UIButton *dragButton;
 
 - (IBAction)calculateAndShowResultView:(id)sender;
 - (IBAction)addPersonalEntry:(id)sender;
