@@ -18,10 +18,10 @@
 // This idInArray indicates the cell's location in the array
 // so that we can save it back to array
 //@property (nonatomic) int idInArray;
-@property (strong, nonatomic) IBOutlet UIButton *centerButton;
+@property (strong, nonatomic) IBOutlet UIButton *iconButton;
 
 // Action for centerButton
-- (IBAction)moveFirstResponder:(id)sender;
+- (IBAction)pressedIconButton:(id)sender;
 
 + (MTEntryTableViewCell *)getEmptyPersonalEntryCell;
 + (MTEntryTableViewCell *)getEmptySharedEntryCell;

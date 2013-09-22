@@ -37,16 +37,16 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="moveFirstResponder:" destination="2" eventType="touchUpInside" id="92"/>
+                            <action selector="pressedIconButton:" destination="2" eventType="touchUpInside" id="srA-ee-NDU"/>
                         </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="0.0" colorSpace="calibratedRGB"/>
             <connections>
-                <outlet property="centerButton" destination="90" id="91"/>
                 <outlet property="entryAmountInDollar" destination="9" id="82"/>
                 <outlet property="entryForName" destination="77" id="83"/>
+                <outlet property="iconButton" destination="90" id="S4u-2L-n9d"/>
             </connections>
         </tableViewCell>
     </objects>

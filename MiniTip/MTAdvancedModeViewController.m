@@ -100,12 +100,13 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 - (IBAction)addPersonalEntry:(id)sender
 {
     NSLog(@"Pressed addPersonalEntry");
-    // TODO: do not add any entry if the last entry amountInDollor is empty
+    // TASK: do not add any entry if the last entry amountInDollor is empty
     // get last entry
     MTEntryTableViewCell *aCell = (MTEntryTableViewCell *)[self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.entryTableView numberOfRowsInSection:0]-1 inSection:0]];
     if (aCell != nil && [ICFormatControl getFromUITextField:aCell.entryAmountInDollar].length == 0) {
         return;
     }
+    //END TASK
     // Create a new Personal EntryItem and add it to the store
     [[MTEntryItemStore defaultStore] createPersonalEntry];
 //    MTEntryItemStore *store = [MTEntryItemStore defaultStore];
@@ -115,17 +116,21 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
     MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryForName] becomeFirstResponder];
-//    [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
-//    [ICFormatControl formatUITextField:[cell entryForName]];
     cell.entryAmountInDollar.delegate = self;
     cell.entryForName.textAlignment = NSTextAlignmentLeft;
-    [[cell entryForName] setKeyboardType:UIKeyboardTypeAlphabet];
-    [[cell centerButton] setImage:[UIImage imageNamed:@"user_male-128.png"] forState:UIControlStateNormal];
+    [[cell iconButton] setImage:[UIImage imageNamed:@"user_male-128.png"] forState:UIControlStateNormal];
 }
 
 - (IBAction)addSharedEntry:(id)sender
 {
     NSLog(@"Pressed addSharedEntry");
+    // TASK: do not add any entry if the last entry amountInDollor is empty
+    // get last entry
+    MTEntryTableViewCell *aCell = (MTEntryTableViewCell *)[self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.entryTableView numberOfRowsInSection:0]-1 inSection:0]];
+    if (aCell != nil && [ICFormatControl getFromUITextField:aCell.entryAmountInDollar].length == 0) {
+        return;
+    }
+    // END TASK
     // Create a new Personal EntryItem and add it to the store
     [[MTEntryItemStore defaultStore] createSharedEntry];
     [[self entryTableView] reloadData];
@@ -134,11 +139,8 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
     MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryAmountInDollar] becomeFirstResponder];
-//    [ICFormatControl formatUITextField:[cell entryAmountInDollar]];
-//    [ICFormatControl formatUITextField:[cell entryForName]];
     cell.entryAmountInDollar.delegate = self;
-    [[cell entryForName] setKeyboardType:UIKeyboardTypeAlphabet];
-    [[cell centerButton] setImage:[UIImage imageNamed:@"group-128.png"] forState:UIControlStateNormal];
+    [[cell iconButton] setImage:[UIImage imageNamed:@"group-128.png"] forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad
@@ -147,13 +149,15 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     // register keyboard notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    // part of add button to keyboard task
+    // TASK: add notification for keyboard did show to add custom Done button
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-//    [self.view addGestureRecognizer:tap];
-//    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap)];
-//    [doubleTap setNumberOfTapsRequired:2];
-//    [self.view addGestureRecognizer:doubleTap];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    // END TASK
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap)];
+    [doubleTap setNumberOfTapsRequired:2];
+    [self.view addGestureRecognizer:doubleTap];
 
     // setup custom UINavigation titleView
     [ICFormatControl setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"PARTY"];
@@ -172,6 +176,9 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     self.entryTableView.backgroundColor = [ICFormatControl getBackgroundColor];
     self.createIndividualEntryButton.backgroundColor = [UIColor clearColor];
     self.createSharedEntryButton.backgroundColor = [UIColor clearColor];
+    // buttons setup
+    [ICFormatControl formatUIButton:self.createIndividualEntryButton];
+    [ICFormatControl formatUIButton:self.createSharedEntryButton];
     
     // add 1 entry to tableview first, at least 1 personal entry
     [self addPersonalEntry:nil];
@@ -280,9 +287,6 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
             // save entryAmountInDollar into MTEntryItem in IndexPath
             MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
             p.entryAmountInDollar = [ICFormatControl getFromUITextField:textField];
-            if (p.entryAmountInDollar.length > 0) {
-                [self addPersonalEntry:nil];
-            }
             break;
         }
         case TAG_ENTRY_FOR_NAME:
@@ -290,16 +294,11 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
             NSLog(@"textFieldDidEndEditing for %@, IndexPath %d", @"entryForName", [indexPath row]);
             MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
             p.entryForName = [textField text];
-//            [[cell entryAmountInDollar] becomeFirstResponder];
             break;
         }
         case TAG_TAX_AMOUNT_UITEXTFIELD:
         {
             // create a personal entry if the tableview has no row
-            int count = [[self entryTableView] numberOfRowsInSection:0];
-            if (count == 0) {
-                [self addPersonalEntry:nil];
-            }
         }
         default:
             break;
@@ -394,7 +393,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     // This app only runs in Portrait mode
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height)-45, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height)-100, 0.0);
     
     self.entryTableView.contentInset = contentInsets;
     self.entryTableView.scrollIndicatorInsets = contentInsets;
@@ -409,14 +408,20 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     self.entryTableView.contentInset = edge;
 }
 
+// TASK: add custom Done button to the number pad
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    if (self.currentKBType == UIKeyboardTypeNumberPad && !self.isDoneButtonDisplayed) {
+    if (self.currentKBType == UIKeyboardTypeNumberPad) {
         [self addDoneButtonToKeyboard];
-    }else{
-        [self removeDoneButtonFromKeyboard];
     }
 }
+
+//- (void)keyboardDidHide:(NSNotification *)notification
+//{
+//    if (self.currentKBType == UIKeyboardTypeNumberPad) {
+//        [self removeDoneButtonFromKeyboard];
+//    }
+//}
 
 - (void)addDoneButtonToKeyboard
 {
@@ -451,5 +456,6 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [self.editingTextField resignFirstResponder];
     self.isDoneButtonDisplayed = NO;
 }
+// END TASK
 
 @end
