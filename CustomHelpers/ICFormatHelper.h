@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MTEntryTableViewCell.h"
 
+
 // This class is to provide an app-wide staic method store
 // as convenience
 @interface ICFormatHelper : NSObject

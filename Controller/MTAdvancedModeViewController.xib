@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="createIndividualEntryButton" destination="Qr0-Li-FaM" id="sdN-Nd-pOj"/>
                 <outlet property="createSharedEntryButton" destination="qNr-Fi-ks6" id="EKg-3P-Oki"/>
-                <outlet property="dragButton" destination="GGI-bo-jnr" id="idd-6K-hn5"/>
                 <outlet property="entryTableView" destination="24" id="65"/>
                 <outlet property="grandTotalLabel" destination="68" id="70"/>
                 <outlet property="taxTextField" destination="57" id="63"/>
@@ -94,13 +93,6 @@
                         <action selector="addSharedEntry:" destination="-1" eventType="touchUpInside" id="WZc-BF-8NS"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GGI-bo-jnr">
-                    <rect key="frame" x="304" y="237" width="16" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="dragme-16x30">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
             </subviews>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -109,7 +101,6 @@
     </objects>
     <resources>
         <image name="card_in_use-128" width="128" height="128"/>
-        <image name="dragme-16x30" width="16" height="30"/>
         <image name="waiter-128" width="128" height="128"/>
     </resources>
 </document>

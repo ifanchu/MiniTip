@@ -26,6 +26,10 @@ int const TAG_TAX_AMOUNT_UITEXTFIELD = 3;
 int const TAG_ENTRY_FOR_NAME = 1;
 int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
 NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
+NSString * const IMAGE_NAME_FOR_CALCULATE = @"math-128";
+NSString * const IMAGE_NAME_FOR_PERSONAL_ENTRY = @"user_male-128";
+NSString * const IMAGE_NAME_FOR_SHARED_ENTRY = @"group-128";
+NSString * const IMAGE_NAME_FOR_TAX_TEXTFIELD = @"money-35";
 
 - (id)init
 {
@@ -33,7 +37,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     self = [super init];
     if (self) {
 //        UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithTitle:@"Calculate" style:UIBarButtonItemStyleBordered target:self action:@selector(calculateAndShowResultView:)];
-        UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"math-128.png"] style:UIBarButtonItemStyleDone target:self action:@selector(calculateAndShowResultView:)];
+        UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:IMAGE_NAME_FOR_CALCULATE] style:UIBarButtonItemStyleDone target:self action:@selector(calculateAndShowResultView:)];
 
         [[self navigationItem] setRightBarButtonItem:btnCalculate animated:YES];
         [self shouldBtnCalculateEnabled];
@@ -118,7 +122,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [[cell entryForName] becomeFirstResponder];
     cell.entryAmountInDollar.delegate = self;
     cell.entryForName.textAlignment = NSTextAlignmentLeft;
-    [[cell iconButton] setImage:[UIImage imageNamed:@"user_male-128.png"] forState:UIControlStateNormal];
+    [[cell iconButton] setImage:[UIImage imageNamed:IMAGE_NAME_FOR_PERSONAL_ENTRY] forState:UIControlStateNormal];
 }
 
 - (IBAction)addSharedEntry:(id)sender
@@ -140,7 +144,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     MTEntryTableViewCell *cell = (MTEntryTableViewCell *)[[self entryTableView] cellForRowAtIndexPath:indexPath];
     [[cell entryAmountInDollar] becomeFirstResponder];
     cell.entryAmountInDollar.delegate = self;
-    [[cell iconButton] setImage:[UIImage imageNamed:@"group-128.png"] forState:UIControlStateNormal];
+    [[cell iconButton] setImage:[UIImage imageNamed:IMAGE_NAME_FOR_SHARED_ENTRY] forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad
@@ -170,7 +174,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     // ui settings
     [ICFormatHelper formatUILabel:self.tipLabel];
     [ICFormatHelper formatUILabel:self.grandTotalLabel];
-    [ICFormatHelper formatUITextField:self.taxTextField withLeftVIewImage:@"money-35.png"];
+    [ICFormatHelper formatUITextField:self.taxTextField withLeftVIewImage:IMAGE_NAME_FOR_TAX_TEXTFIELD];
     taxTextField.tag = TAG_TAX_AMOUNT_UITEXTFIELD;
     self.view.backgroundColor = [ICFormatHelper getBackgroundColor];
     self.entryTableView.backgroundColor = [ICFormatHelper getBackgroundColor];
@@ -179,10 +183,10 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     // buttons setup
     [ICFormatHelper formatUIButton:self.createIndividualEntryButton];
     [ICFormatHelper formatUIButton:self.createSharedEntryButton];
-    
+
     // add 1 entry to tableview first, at least 1 personal entry
     [self addPersonalEntry:nil];
-    
+
     [[self entryTableView] reloadData];
 }
 
@@ -293,7 +297,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
         {
             NSLog(@"textFieldDidEndEditing for %@, IndexPath %d", @"entryForName", [indexPath row]);
             MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
-            p.entryForName = [textField text];
+            p.entryForName = [[textField text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             break;
         }
         case TAG_TAX_AMOUNT_UITEXTFIELD:
@@ -331,7 +335,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     }else if (textField.keyboardType != UIKeyboardTypeNumberPad){
         [self removeDoneButtonFromKeyboard];
     }
-    
+
     self.editingTextField = textField;
     return YES;
 }
@@ -378,7 +382,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"TableView will display cell %ld", (long)indexPath.row);
-    
+
     if ([cell isKindOfClass:[MTEntryTableViewCell class]]) {
         MTEntryTableViewCell *thisCell = (MTEntryTableViewCell *)cell;
         [ICFormatHelper formatUITextField:thisCell.entryForName];
@@ -391,14 +395,14 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
+
     // This app only runs in Portrait mode
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height)-100, 0.0);
-    
+
     self.entryTableView.contentInset = contentInsets;
     self.entryTableView.scrollIndicatorInsets = contentInsets;
     [self.entryTableView scrollToRowAtIndexPath:self.editingIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    
+
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
