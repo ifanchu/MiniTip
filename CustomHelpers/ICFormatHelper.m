@@ -21,9 +21,15 @@
 + (void)formatUILabel:(UILabel *)label
 {
 //    [label setFont: [ICFormatControl getLatoFont:label.font.pointSize]];
-    label.font = [ICFormatHelper getLatoFont:label.font.pointSize];
+    label.font = [ICFormatHelper getLatoLightFont:label.font.pointSize];
     label.textColor = [ICFormatHelper getCustomColorBlue];
     label.minimumScaleFactor = 0.5;
+}
+
++ (void)formatUILabelAsBold:(UILabel *)label
+{
+    [ICFormatHelper formatUILabel:label];
+    label.font = [ICFormatHelper getLatoBoldFont:label.font.pointSize];
 }
 
 + (void)formatUITextField:(UITextField *)textField
@@ -41,9 +47,9 @@
 //    frameRect.size.width = 230;
     textField.frame = frameRect;
     textField.keyboardType = UIKeyboardTypeNumberPad;
-    textField.font = [ICFormatHelper getLatoFont:textField.font.pointSize];
+    textField.font = [ICFormatHelper getLatoLightFont:textField.font.pointSize];
 //    [textField setFont: [ICFormatControl getLatoFont:textField.font.pointSize]];
-        textField.textColor = [ICFormatHelper getCustomColorBlue];
+    textField.textColor = [ICFormatHelper getCustomColorBlue];
 //    textField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
 
 }
@@ -70,14 +76,24 @@
     return NO;
 }
 
-+ (UIFont *)getLatoFont:(CGFloat)size
++ (UIFont *)getLatoLightFont:(CGFloat)size
 {
-    return [UIFont fontWithName:@"Lato" size:size];
+    return [UIFont fontWithName:@"Lato-Light" size:size];
+}
+
++ (UIFont *)getLatoBoldFont:(CGFloat)size
+{
+    return [UIFont fontWithName:@"Lato-Bold" size:size];
 }
 
 + (UIColor *)getCustomColorBlue
 {
     return [UIColor colorWithRed:69.0/255.0 green:122.0/255.0 blue:177.0/255.0 alpha:1.0f];
+}
+
++ (UIColor *)getCustomLightGray
+{
+    return [UIColor colorWithRed:170.0/255.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0f];
 }
 
 + (UIColor *)getBackgroundColor
@@ -114,4 +130,42 @@
 {
     return [UIImage imageNamed:@"user_male-128.png"];
 }
+
+// code from http://stackoverflow.com/questions/5864383/ios-uibutton-with-multiple-labels
+// Formats a label to add to a button.  Supports multiline buttons
+// Parameters:
+// button - the button to add the label to
+// height - height of the label.  usual value is 44
+// offset - the offset from the top of the button
+// labelText - the text for the label
+// color - color of the text
+// formatAsBold - YES = bold NO = normal weight
+// tagNumber - tag for the label
+
++ (void)formatLabelForButton:(UIButton *)button withHeight:(double)height andVerticalOffset:(double)offset andText:(NSString *)labelText withFont:(UIFont *)font withFontColor:(UIColor *)color withTag:(NSInteger)tagNumber
+{
+    
+    // Get width of button
+    double buttonWidth= button.frame.size.width;
+    
+    // Initialize buttonLabel
+    UILabel *buttonLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, offset, buttonWidth, height)];
+    
+    // Set font
+    buttonLabel.font = font;
+    
+    // set font color of label
+    buttonLabel.textColor = color;
+    
+    // Set background color, text, tag, and font
+    buttonLabel.backgroundColor = [UIColor clearColor];
+    buttonLabel.text = labelText;
+    buttonLabel.tag = tagNumber;
+    
+    // Center label
+    buttonLabel.textAlignment = NSTextAlignmentCenter;
+    
+    // Add label to button
+    [button addSubview:buttonLabel];
+} // End formatLabelForButton
 @end

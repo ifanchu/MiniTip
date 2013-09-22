@@ -79,7 +79,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [ICFormatHelper formatUILabel:cell.textLabel];
-    [ICFormatHelper formatUILabel:cell.detailTextLabel];
+    [ICFormatHelper formatUILabelAsBold:cell.detailTextLabel];
 }
 
 @end

@@ -27,15 +27,22 @@
 // Format UILabel, needs to be called for each UILabel which requires formatting
 + (void)formatUILabel:(UILabel *) label;
 // get the custom font Lato
-+ (UIFont *)getLatoFont: (CGFloat) size;
++ (UIFont *)getLatoLightFont: (CGFloat) size;
++ (UIFont *)getLatoBoldFont: (CGFloat) size;
 + (void)formatUIButton:(UIButton *)button;
 + (UIColor *)getBackgroundColor;
 + (void)setupCustomNavigationItemTitleView:(UINavigationItem *)navigationItem withCustomText:(NSString *)text;
 + (UIColor *)getCustomColorBlue;
+// #aaaaaa: rgb(170, 170, 170)
++ (UIColor *)getCustomLightGray;
 + (void)cleanTextWhenTextFieldDidBeginEditing:(UITextField *)textField;
 + (MTEntryTableViewCell *)getCellFromTextField:(UITextField *)textField;
 // image for shared entry
 + (UIImage *)getGroupImage;
 // image for personal entry
 + (UIImage *)getPersonalImage;
+// format UILabel text as bold
++ (void) formatUILabelAsBold:(UILabel *)label;
+
++ (void)formatLabelForButton: (UIButton *) button withHeight: (double) height andVerticalOffset:(double) offset andText: (NSString *) labelText withFont: (UIFont *) font withFontColor:(UIColor *)color withTag: (NSInteger)tagNumber;
 @end

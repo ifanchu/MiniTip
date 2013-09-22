@@ -32,12 +32,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     UINavigationItem *p = [self navigationItem];
-    [p setTitle:@"MiniTip"];
+    
+    [ICFormatHelper setupCustomNavigationItemTitleView:p withCustomText:@"MiniTip"];
+    
     
     [ICFormatHelper formatUIButton:self.basicButton];
     [ICFormatHelper formatUIButton:self.partyButton];
-    [ICFormatHelper formatUILabel:self.basicLabel];
-    [ICFormatHelper formatUILabel:self.partyLabel];
+    [ICFormatHelper formatUILabelAsBold:self.basicLabel];
+    [ICFormatHelper formatUILabelAsBold:self.partyLabel];
+    [ICFormatHelper formatLabelForButton:self.basicButton withHeight:30 andVerticalOffset:140 andText:@"Split the bill evenly" withFont:[ICFormatHelper getLatoLightFont:18] withFontColor:[ICFormatHelper getCustomLightGray] withTag:0];
+    [ICFormatHelper formatLabelForButton:self.partyButton withHeight:30 andVerticalOffset:140 andText:@"Specify each dish and shared dishes" withFont:[ICFormatHelper getLatoLightFont:18] withFontColor:[ICFormatHelper getCustomLightGray] withTag:0];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     NSLog(@"MTMain viewDidLoad");
 }

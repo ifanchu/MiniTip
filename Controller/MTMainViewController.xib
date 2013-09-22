@@ -8,22 +8,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MTMainViewController">
             <connections>
                 <outlet property="basicButton" destination="4" id="1Qt-an-4k2"/>
-                <outlet property="basicLabel" destination="6ea-gd-zp7" id="aqj-Ob-TRB"/>
                 <outlet property="partyButton" destination="18" id="ZdV-DW-rd3"/>
-                <outlet property="partyLabel" destination="q2U-Rs-HJq" id="rnX-mK-l6s"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="64" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4">
-                    <rect key="frame" x="0.0" y="7" width="320" height="260"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
                     <state key="normal" title="BASIC">
+                        <color key="titleColor" red="0.27058823529999998" green="0.47843137250000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -31,10 +30,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="18">
-                    <rect key="frame" x="0.0" y="277" width="320" height="238"/>
+                    <rect key="frame" x="0.0" y="231" width="320" height="220"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
                     <state key="normal" title="PARTY">
+                        <color key="titleColor" red="0.27058823529999998" green="0.47843137250000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -42,25 +42,12 @@
                     </connections>
                 </button>
                 <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="23">
-                    <rect key="frame" x="0.0" y="516.00000000000011" width="320" height="51"/>
+                    <rect key="frame" x="0.0" y="458" width="320" height="45"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                 </adBannerView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Split the bill evenly" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6ea-gd-zp7">
-                    <rect key="frame" x="20" y="156" width="280" height="38"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Specify each dish and shared dishes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q2U-Rs-HJq">
-                    <rect key="frame" x="-49" y="434" width="419" height="38"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>

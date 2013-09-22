@@ -92,45 +92,6 @@ int const SECTION_SUBTOTAL = 4;
     }
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    switch (section) {
-//        case SECTION_PERSONAL_ENTRIES:
-//        {
-//            // Personal Entries section
-//            return [NSString stringWithFormat:@"%@'s Entries", self.resultItem.getName];
-//            break;
-//        }
-//        case SECTION_SHARED_ENTRIES:
-//        {
-//            // shared entries section
-//            return @"Shared Entries";
-//            break;
-//        }
-//        case SECTION_TIP:
-//        {
-//            // tip section
-//            return [NSString stringWithFormat:@"Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]];
-//            break;
-//        }
-//        case SECTION_TAX:
-//        {
-//            //tax section
-//            return [NSString stringWithFormat:@"Total Tax: $%.2f", [[MTResultItemStore defaultStore] totalTax]];
-//            break;
-//        }
-//        case SECTION_SUBTOTAL:
-//        {
-//            // subtotal section
-//            return @"";
-//            break;
-//        }
-//        default:
-//            return @"";
-//            break;
-//    }
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -224,7 +185,7 @@ int const SECTION_SUBTOTAL = 4;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [ICFormatHelper formatUILabel:cell.textLabel];
-    [ICFormatHelper formatUILabel:cell.detailTextLabel];
+    [ICFormatHelper formatUILabelAsBold:cell.detailTextLabel];
 }
 // create a UILabel, format it and assign it to header
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -235,7 +196,7 @@ int const SECTION_SUBTOTAL = 4;
             aLabel.text = [[NSString stringWithFormat:@"  %@'s Entries", self.resultItem.getName] uppercaseString];
             break;
         case SECTION_SHARED_ENTRIES:
-            aLabel.text = [@"Shared Entries" uppercaseString];
+            aLabel.text = [@"  Shared Entries" uppercaseString];
             break;
         case SECTION_TIP:
             aLabel.text = [[NSString stringWithFormat:@"  Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]] uppercaseString];
@@ -256,7 +217,7 @@ int const SECTION_SUBTOTAL = 4;
 // Need to implement this delegate method for viewForHeaderInSection to work properly
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    return 30;
 }
 
 @end
