@@ -25,6 +25,8 @@
 		0584D74D17EF4E6900F5B829 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0584D74A17EF4E6900F5B829 /* ECSlidingViewController.m */; };
 		0584D74E17EF4E6900F5B829 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0584D74C17EF4E6900F5B829 /* UIImage+ImageWithUIView.m */; };
 		0584D75017EF561400F5B829 /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0584D74F17EF561400F5B829 /* Lato-Bol.ttf */; };
+		0584D76C17EFE38D00F5B829 /* DK Crayon Crumble.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0584D76717EFE38D00F5B829 /* DK Crayon Crumble.ttf */; };
+		0584D76F17EFE38D00F5B829 /* PWScritch.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0584D76A17EFE38D00F5B829 /* PWScritch.ttf */; };
 		058D114F16644D5F00C003C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 058D114E16644D5F00C003C3 /* UIKit.framework */; };
 		058D115116644D5F00C003C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 058D115016644D5F00C003C3 /* Foundation.framework */; };
 		058D115316644D5F00C003C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 058D115216644D5F00C003C3 /* CoreGraphics.framework */; };
@@ -67,7 +69,10 @@
 		0584D74A17EF4E6900F5B829 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		0584D74B17EF4E6900F5B829 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
 		0584D74C17EF4E6900F5B829 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
-		0584D74F17EF561400F5B829 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
+		0584D74F17EF561400F5B829 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bol.ttf"; path = "Resources/Fonts/Lato-Bol.ttf"; sourceTree = "<group>"; };
+		0584D76417EFDD2500F5B829 /* MTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTConstants.h; path = CustomHelpers/MTConstants.h; sourceTree = "<group>"; };
+		0584D76717EFE38D00F5B829 /* DK Crayon Crumble.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DK Crayon Crumble.ttf"; path = "Resources/Fonts/DK Crayon Crumble.ttf"; sourceTree = "<group>"; };
+		0584D76A17EFE38D00F5B829 /* PWScritch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = PWScritch.ttf; path = Resources/Fonts/PWScritch.ttf; sourceTree = "<group>"; };
 		058D114A16644D5F00C003C3 /* MiniTip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniTip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		058D114E16644D5F00C003C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		058D115016644D5F00C003C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -138,6 +143,7 @@
 			children = (
 				051D8A0B17EA0470004273EE /* ICFormatHelper.h */,
 				051D8A0C17EA0470004273EE /* ICFormatHelper.m */,
+				0584D76417EFDD2500F5B829 /* MTConstants.h */,
 			);
 			name = CustomHelpers;
 			sourceTree = "<group>";
@@ -155,6 +161,8 @@
 		0563331017EA1DC9004FB317 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				0584D76717EFE38D00F5B829 /* DK Crayon Crumble.ttf */,
+				0584D76A17EFE38D00F5B829 /* PWScritch.ttf */,
 				0584D74F17EF561400F5B829 /* Lato-Bol.ttf */,
 				055E8A0317E9FBF7009EA946 /* Lato-Lig.ttf */,
 			);
@@ -345,8 +353,10 @@
 				058D115916644D5F00C003C3 /* InfoPlist.strings in Resources */,
 				0584D74617EEEFEB00F5B829 /* Images.xcassets in Resources */,
 				058D117616644DC300C003C3 /* UTViewController.xib in Resources */,
+				0584D76C17EFE38D00F5B829 /* DK Crayon Crumble.ttf in Resources */,
 				058D119B16672D6B00C003C3 /* MTMainViewController.xib in Resources */,
 				0584D75017EF561400F5B829 /* Lato-Bol.ttf in Resources */,
+				0584D76F17EFE38D00F5B829 /* PWScritch.ttf in Resources */,
 				056936D216673F7D00091D92 /* MTAdvancedModeViewController.xib in Resources */,
 				056936D81667475000091D92 /* MTEntryTableViewCell.xib in Resources */,
 				056936F216687A2900091D92 /* MTResultsViewController.xib in Resources */,

@@ -32,9 +32,6 @@
 {
     [entries removeAllObjects];
     [sharedEntries removeAllObjects];
-//    for (int i=0; i < NUMBER_OF_INVISIBLE_CELL; i++) {
-//        [entries addObject:[MTEntryItem getInvisibleEntry]];
-//    }
 }
 
 - (id)init

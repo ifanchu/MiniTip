@@ -25,7 +25,7 @@ int const TAG_FOR_TAX_AMOUNT=1;
 //    UINavigationItem *p = [self navigationItem];
 //    [p setTitle:@"BASIC"];
     // setup custom UINavigation titleView
-    [ICFormatHelper setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"BASIC"];
+    [ICFormatHelper setupCustomNavigationItemTitleView:self.navigationItem withCustomText:TITLE_TEXT_FOR_BASIC];
     
 	// Do any additional setup after loading the view, typically from a nib.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -39,8 +39,8 @@ int const TAG_FOR_TAX_AMOUNT=1;
     // UI Setting
     billAmountTextField.tag = TAG_FOR_BILL_AMOUNT;
     taxAmountTextField.tag = TAG_FOR_TAX_AMOUNT;
-    [ICFormatHelper formatUITextField:self.billAmountTextField withLeftVIewImage:@"bill-35.png"];
-    [ICFormatHelper formatUITextField:[self taxAmountTextField] withLeftVIewImage:@"money-35.png"];
+    [ICFormatHelper formatUITextField:self.billAmountTextField withLeftVIewImage:IMAGE_NAME_FOR_BILL_TEXTFIELD];
+    [ICFormatHelper formatUITextField:[self taxAmountTextField] withLeftVIewImage:IMAGE_NAME_FOR_TAX_TEXTFIELD];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [ICFormatHelper formatUILabel:self.peopleLabel];
     [ICFormatHelper formatUILabel:self.tipLabel];

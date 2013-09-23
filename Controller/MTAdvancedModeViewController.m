@@ -26,10 +26,6 @@ int const TAG_TAX_AMOUNT_UITEXTFIELD = 3;
 int const TAG_ENTRY_FOR_NAME = 1;
 int const TAG_ENTRY_AMOUNT_IN_DOLLAR=0;
 NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
-NSString * const IMAGE_NAME_FOR_CALCULATE = @"math-128";
-NSString * const IMAGE_NAME_FOR_PERSONAL_ENTRY = @"user_male-128";
-NSString * const IMAGE_NAME_FOR_SHARED_ENTRY = @"group-128";
-NSString * const IMAGE_NAME_FOR_TAX_TEXTFIELD = @"money-35";
 
 - (id)init
 {
@@ -164,7 +160,7 @@ NSString * const IMAGE_NAME_FOR_TAX_TEXTFIELD = @"money-35";
     [self.view addGestureRecognizer:doubleTap];
 
     // setup custom UINavigation titleView
-    [ICFormatHelper setupCustomNavigationItemTitleView:self.navigationItem withCustomText:@"PARTY"];
+    [ICFormatHelper setupCustomNavigationItemTitleView:self.navigationItem withCustomText:TITLE_TEXT_FOR_PARTY];
 
     // Load Custom cell nib file
     UINib *nib = [UINib nibWithNibName:@"MTEntryTableViewCell" bundle:nil];
@@ -419,13 +415,6 @@ NSString * const IMAGE_NAME_FOR_TAX_TEXTFIELD = @"money-35";
         [self addDoneButtonToKeyboard];
     }
 }
-
-//- (void)keyboardDidHide:(NSNotification *)notification
-//{
-//    if (self.currentKBType == UIKeyboardTypeNumberPad) {
-//        [self removeDoneButtonFromKeyboard];
-//    }
-//}
 
 - (void)addDoneButtonToKeyboard
 {

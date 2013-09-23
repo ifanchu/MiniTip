@@ -31,6 +31,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Lig.ttf</string>
+		<string>PWScritch.ttf</string>
+		<string>DK Crayon Crumble.ttf</string>
 	</array>
 	<key>UIAppsFonts</key>
 	<array>

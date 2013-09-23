@@ -38,7 +38,7 @@ int const SECTION_SUBTOTAL = 4;
     
     UINavigationItem *p = [self navigationItem];
 //    [p setTitle:[NSString stringWithFormat:@"%@'s breakdown", [[self resultItem] getName]]];
-    [ICFormatHelper setupCustomNavigationItemTitleView:p withCustomText:@"BREAKDOWN"];
+    [ICFormatHelper setupCustomNavigationItemTitleView:p withCustomText:TITLE_TEXT_FOR_DETAIL];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [ICFormatHelper getBackgroundColor];
     

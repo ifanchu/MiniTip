@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     UINavigationItem *p = [self navigationItem];
-    [ICFormatHelper setupCustomNavigationItemTitleView:p withCustomText:@"EACH PAYS"];
+    [ICFormatHelper setupCustomNavigationItemTitleView:p withCustomText:TITLE_TEXT_FOR_RESULT];
     self.edgesForExtendedLayout = UIRectEdgeNone;    
 }
 

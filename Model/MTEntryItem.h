@@ -22,6 +22,7 @@
 // The meal costs amountInDollars
 @property (nonatomic, copy) NSString *entryAmountInDollar;
 @property (nonatomic) BOOL isSharedEntry;
+//TODO: get rid of this
 @property (nonatomic) BOOL isInvisible;
 
 @end
