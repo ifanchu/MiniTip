@@ -105,8 +105,8 @@
 {
     CGRect frame = CGRectMake(0, 0, 400, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.font = [UIFont boldSystemFontOfSize:30.0];
     [ICFormatHelper formatUILabel:label];
+    label.font = [ICFormatHelper getLatoBoldFont:30];
     label.text = text;
     navigationItem.titleView = label;
 }

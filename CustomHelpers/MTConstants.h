@@ -14,7 +14,7 @@
 
 // Font names
 #define FONT_NAME_LIGHT @"DK Crayon Crumble"
-#define FONT_NAME_BOLD @"Lato-Bold"
+#define FONT_NAME_BOLD @"PWScritch"
 // Image names
 #define IMAGE_NAME_FOR_BACKGROUND @"background"
 #define IMAGE_NAME_FOR_SHARED_ENTRY @"group-128"

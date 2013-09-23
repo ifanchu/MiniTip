@@ -185,7 +185,9 @@ int const SECTION_SUBTOTAL = 4;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [ICFormatHelper formatUILabel:cell.textLabel];
+    cell.textLabel.font = [ICFormatHelper getLatoLightFont:20];
     [ICFormatHelper formatUILabelAsBold:cell.detailTextLabel];
+    cell.detailTextLabel.font = [ICFormatHelper getLatoBoldFont:20];
 }
 // create a UILabel, format it and assign it to header
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -199,7 +201,8 @@ int const SECTION_SUBTOTAL = 4;
             aLabel.text = [@"  Shared Entries" uppercaseString];
             break;
         case SECTION_TIP:
-            aLabel.text = [[NSString stringWithFormat:@"  Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]] uppercaseString];
+//            aLabel.text = [[NSString stringWithFormat:@"  Total Tip: $%.2f x %.0f%% = $%.2f", [[MTResultItemStore defaultStore] sumOfAllEntries], [[MTResultItemStore defaultStore] tipPercent]*100 ,[[MTResultItemStore defaultStore] totalTip]] uppercaseString];
+            aLabel.text = [[NSString stringWithFormat:@"  Total Tip: $%.2f",[[MTResultItemStore defaultStore] totalTip]] uppercaseString];
             break;
         case SECTION_TAX:
             aLabel.text = [[NSString stringWithFormat:@"  Total Tax: $%.2f", [[MTResultItemStore defaultStore] totalTax]] uppercaseString];
@@ -211,6 +214,9 @@ int const SECTION_SUBTOTAL = 4;
             break;
     }
     [ICFormatHelper formatUILabel:aLabel];
+    aLabel.font = [ICFormatHelper getLatoLightFont:26];
+    aLabel.minimumScaleFactor = 0.5;
+    aLabel.numberOfLines = 2;
     return aLabel;
 }
 

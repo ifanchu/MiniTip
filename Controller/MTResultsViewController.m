@@ -79,7 +79,9 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [ICFormatHelper formatUILabel:cell.textLabel];
+    cell.textLabel.font = [ICFormatHelper getLatoLightFont:26];
     [ICFormatHelper formatUILabelAsBold:cell.detailTextLabel];
+    cell.detailTextLabel.font = [ICFormatHelper getLatoBoldFont:26];
 }
 
 @end

@@ -293,7 +293,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
         {
             NSLog(@"textFieldDidEndEditing for %@, IndexPath %d", @"entryForName", [indexPath row]);
             MTEntryItem *p = [[[MTEntryItemStore defaultStore] allEntries] objectAtIndex:[indexPath row]];
-            p.entryForName = [[textField text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            p.entryForName = [[[textField text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] uppercaseString];
             break;
         }
         case TAG_TAX_AMOUNT_UITEXTFIELD:
@@ -383,6 +383,8 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
         MTEntryTableViewCell *thisCell = (MTEntryTableViewCell *)cell;
         [ICFormatHelper formatUITextField:thisCell.entryForName];
         [ICFormatHelper formatUITextField:thisCell.entryAmountInDollar];
+        thisCell.entryForName.font = [ICFormatHelper getLatoLightFont:36];
+        thisCell.entryAmountInDollar.font = [ICFormatHelper getLatoLightFont:36];
         thisCell.entryForName.textAlignment = NSTextAlignmentLeft;
         thisCell.entryForName.keyboardType = UIKeyboardTypeNamePhonePad;
     }
