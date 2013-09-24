@@ -1,17 +1,3 @@
-//
-//  MTConstants.h
-//  MiniTip
-//
-//  Created by IFAN CHU on 9/22/13.
-//  Copyright (c) 2013 IFAN CHU. All rights reserved.
-//
-
-//#import <Foundation/Foundation.h>
-//
-//@interface MTConstants : NSObject
-//
-//@end
-
 // Font names
 #define FONT_NAME_LIGHT @"DK Crayon Crumble"
 #define FONT_NAME_BOLD @"PWScritch"

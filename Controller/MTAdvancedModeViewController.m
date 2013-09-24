@@ -32,7 +32,6 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     // Call the superclass's designated initializer
     self = [super init];
     if (self) {
-//        UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithTitle:@"Calculate" style:UIBarButtonItemStyleBordered target:self action:@selector(calculateAndShowResultView:)];
         UIBarButtonItem *btnCalculate = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:IMAGE_NAME_FOR_CALCULATE] style:UIBarButtonItemStyleDone target:self action:@selector(calculateAndShowResultView:)];
 
         [[self navigationItem] setRightBarButtonItem:btnCalculate animated:YES];
@@ -151,7 +150,6 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     // TASK: add notification for keyboard did show to add custom Done button
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     // END TASK
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
@@ -323,6 +321,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 }
 
 // part of add done button task
+// when a UITextField should begin editing, check whether the keyboard type is number pad, if yes, add a Done button on the bottom left
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     self.currentKBType = textField.keyboardType;
@@ -331,7 +330,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     }else if (textField.keyboardType != UIKeyboardTypeNumberPad){
         [self removeDoneButtonFromKeyboard];
     }
-
+    // set current keyboard type for future use
     self.editingTextField = textField;
     return YES;
 }
@@ -346,6 +345,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [[self grandTotalLabel] setText:[NSString stringWithFormat:@"$%.2f", grandTotal]];
 }
 
+// what to do if user clicks on the return button on keyboard
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     switch (textField.tag) {
@@ -374,7 +374,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     return YES;
 }
 
-// format UITextField here before the cells got displayed
+// format UITextField here right before the cells got displayed
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"TableView will display cell %ld", (long)indexPath.row);
@@ -383,13 +383,16 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
         MTEntryTableViewCell *thisCell = (MTEntryTableViewCell *)cell;
         [ICFormatHelper formatUITextField:thisCell.entryForName];
         [ICFormatHelper formatUITextField:thisCell.entryAmountInDollar];
+        // setup custom font size
         thisCell.entryForName.font = [ICFormatHelper getLatoLightFont:36];
         thisCell.entryAmountInDollar.font = [ICFormatHelper getLatoLightFont:36];
+        // setup custom alignment and keybaord type
         thisCell.entryForName.textAlignment = NSTextAlignmentLeft;
         thisCell.entryForName.keyboardType = UIKeyboardTypeNamePhonePad;
     }
 }
 
+// to scroll the table up so that the editing cell is visible
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
@@ -403,6 +406,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 
 }
 
+// move the table view down to its original place when keyboard is going to hide
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -425,6 +429,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     self.doneButton.frame = CGRectMake(0, 163, 106, 53);
     [self.doneButton setTitle:TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD forState:UIControlStateNormal];
     [self.doneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    // hook up doneButton with method pressedDoneButton when UIControlEventTouchUpInside event occurs
     [self.doneButton addTarget:self action:@selector(pressedDoneButton) forControlEvents:UIControlEventTouchUpInside];
     // locate keyboard view
     if ([[[UIApplication sharedApplication] windows] count] > 1){
@@ -433,19 +438,21 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
         for (int i=0; i<[tempWindow.subviews count]; i++) {
             keyboard = [tempWindow.subviews objectAtIndex:i];
             if ([[keyboard description] hasPrefix:@"<UIPeripheralHost"] == YES) {
+                // actually add Done button to keyboard view
                 [keyboard addSubview:self.doneButton];
                 self.isDoneButtonDisplayed = YES;
             }
         }
     }
 }
-
+// remove Done button from keyboard
 -(void)removeDoneButtonFromKeyboard
 {
     [self.doneButton removeFromSuperview];
     self.isDoneButtonDisplayed = NO;
 }
 
+// what to do if user clicks on Done button
 - (void)pressedDoneButton
 {
     [self.editingTextField resignFirstResponder];

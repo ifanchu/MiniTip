@@ -27,15 +27,20 @@
 + (NSString *)getFromUITextField:(UITextField *) textField;
 // Format UILabel, needs to be called for each UILabel which requires formatting
 + (void)formatUILabel:(UILabel *) label;
-// get the custom font Lato
+// get the custom font light
 + (UIFont *)getLatoLightFont: (CGFloat) size;
 + (UIFont *)getLatoBoldFont: (CGFloat) size;
+// format the given UIButton
 + (void)formatUIButton:(UIButton *)button;
+// get the background pattern
 + (UIColor *)getBackgroundColor;
+// setup NavigationTitleView
 + (void)setupCustomNavigationItemTitleView:(UINavigationItem *)navigationItem withCustomText:(NSString *)text;
+// rgb(69, 122, 177)
 + (UIColor *)getCustomColorBlue;
 // #aaaaaa: rgb(170, 170, 170)
 + (UIColor *)getCustomLightGray;
+// This method can be called inside UITextField delegate method DidBeginEditing to clear the text
 + (void)cleanTextWhenTextFieldDidBeginEditing:(UITextField *)textField;
 + (MTEntryTableViewCell *)getCellFromTextField:(UITextField *)textField;
 // image for shared entry

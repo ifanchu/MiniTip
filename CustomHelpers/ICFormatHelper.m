@@ -144,27 +144,27 @@
 
 + (void)formatLabelForButton:(UIButton *)button withHeight:(double)height andVerticalOffset:(double)offset andText:(NSString *)labelText withFont:(UIFont *)font withFontColor:(UIColor *)color withTag:(NSInteger)tagNumber
 {
-    
+
     // Get width of button
     double buttonWidth= button.frame.size.width;
-    
+
     // Initialize buttonLabel
     UILabel *buttonLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, offset, buttonWidth, height)];
-    
+
     // Set font
     buttonLabel.font = font;
-    
+
     // set font color of label
     buttonLabel.textColor = color;
-    
+
     // Set background color, text, tag, and font
     buttonLabel.backgroundColor = [UIColor clearColor];
     buttonLabel.text = labelText;
     buttonLabel.tag = tagNumber;
-    
+
     // Center label
     buttonLabel.textAlignment = NSTextAlignmentCenter;
-    
+
     // Add label to button
     [button addSubview:buttonLabel];
 } // End formatLabelForButton
