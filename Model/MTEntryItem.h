@@ -14,7 +14,6 @@
 }
 + (id)getEmptyPersonalEntry;
 + (id)getEmptySharedEntry;
-+ (id)getInvisibleEntry;
 - (id)initWithEntryForName:(NSString *)aEntryForName entryAmountInDollar:(NSString *)aEntryAmountInDollar isSharedEntry:(BOOL)aIsSharedEntry;
 
 // The meal is for forName
@@ -22,7 +21,5 @@
 // The meal costs amountInDollars
 @property (nonatomic, copy) NSString *entryAmountInDollar;
 @property (nonatomic) BOOL isSharedEntry;
-//TODO: get rid of this
-@property (nonatomic) BOOL isInvisible;
 
 @end

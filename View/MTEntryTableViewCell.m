@@ -48,23 +48,7 @@
 
 //TODO: action for iconButton
 - (IBAction)pressedIconButton:(id)sender{
-//    [[self entryForName] becomeFirstResponder];
-//    if ([self isSharedEntry])
-//        [[self entryAmountInDollar] resignFirstResponder];
-//    if (isSharedEntry) {
-//        // if the cell is shared, change it to personal
-//        [[self entryForName] setEnabled:YES];
-//        self.isSharedEntry = NO;
-//        [self.centerButton setImage:[ICFormatControl getPersonalImage] forState:UIControlStateNormal];
-//        [[self entryForName] becomeFirstResponder];
-//        [[self entryForName] setPlaceholder:@"name"];
-//    }else{
-//        // if the cell is personal, change it to shared
-//        [[self entryForName] setEnabled:NO];
-//        self.isSharedEntry = YES;
-//        [self.centerButton setImage:[ICFormatControl getGroupImage] forState:UIControlStateNormal];
-//        [[self entryAmountInDollar] becomeFirstResponder];
-//    }
+    // do nothing for now
 }
 
 @end

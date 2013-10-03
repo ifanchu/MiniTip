@@ -37,6 +37,9 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
         [[self navigationItem] setRightBarButtonItem:btnCalculate animated:YES];
         [self shouldBtnCalculateEnabled];
     }
+    // prevent multi-touch on both buttons at the same time
+    self.createIndividualEntryButton.exclusiveTouch = YES;
+    self.createSharedEntryButton.exclusiveTouch = YES;
     return self;
 }
 

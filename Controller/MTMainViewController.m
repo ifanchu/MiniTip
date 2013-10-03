@@ -43,6 +43,9 @@
     [ICFormatHelper formatLabelForButton:self.basicButton withHeight:30 andVerticalOffset:140 andText:ACCESSORY_LABEL_TEXT_FOR_BASIC withFont:[ICFormatHelper getLatoLightFont:18] withFontColor:[ICFormatHelper getCustomLightGray] withTag:0];
     [ICFormatHelper formatLabelForButton:self.partyButton withHeight:30 andVerticalOffset:140 andText:ACCESSORY_LABEL_TEXT_FOR_PARTY withFont:[ICFormatHelper getLatoLightFont:18] withFontColor:[ICFormatHelper getCustomLightGray] withTag:0];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    // prevent multi-touch on both buttons at the same time
+    self.basicButton.exclusiveTouch = YES;
+    self.partyButton.exclusiveTouch = YES;
     NSLog(@"MTMain viewDidLoad");
 }
 

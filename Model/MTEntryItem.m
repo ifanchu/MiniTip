@@ -21,12 +21,6 @@
     return [[MTEntryItem alloc] initWithEntryForName:@"" entryAmountInDollar:@"" isSharedEntry:YES];
 }
 
-+ (id)getInvisibleEntry
-{
-    MTEntryItem *i = [MTEntryItem getEmptyPersonalEntry];
-    i.isInvisible = YES;
-    return i;
-}
 
 - (id)initWithEntryForName:(NSString *)aEntryForName entryAmountInDollar:(NSString *)aEntryAmountInDollar isSharedEntry:(BOOL)aIsSharedEntry
 {
@@ -36,7 +30,6 @@
         [self setEntryAmountInDollar:aEntryAmountInDollar];
         [self setEntryForName:aEntryForName];
         [self setIsSharedEntry:aIsSharedEntry];
-        [self setIsInvisible:NO];
     }
     return self;
 }
@@ -53,8 +46,6 @@
     
     [desc appendFormat:@" costs %@", entryAmountInDollar];
     
-    if([self isInvisible])
-        [desc appendString:@", is invisible."];
     
     return desc;
 }
