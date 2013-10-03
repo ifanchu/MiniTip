@@ -21,7 +21,7 @@
 + (void)formatUILabel:(UILabel *)label
 {
 //    [label setFont: [ICFormatControl getLatoFont:label.font.pointSize]];
-    label.font = [ICFormatHelper getLatoLightFont:label.font.pointSize];
+    label.font = [ICFormatHelper getLightFont:label.font.pointSize];
     label.textColor = [ICFormatHelper getCustomColorBlue];
     label.minimumScaleFactor = 0.5;
 }
@@ -29,7 +29,7 @@
 + (void)formatUILabelAsBold:(UILabel *)label
 {
     [ICFormatHelper formatUILabel:label];
-    label.font = [ICFormatHelper getLatoBoldFont:label.font.pointSize];
+    label.font = [ICFormatHelper getBoldFont:label.font.pointSize];
 }
 
 + (void)formatUITextField:(UITextField *)textField
@@ -47,7 +47,7 @@
 //    frameRect.size.width = 230;
     textField.frame = frameRect;
     textField.keyboardType = UIKeyboardTypeNumberPad;
-    textField.font = [ICFormatHelper getLatoLightFont:textField.font.pointSize];
+    textField.font = [ICFormatHelper getLightFont:textField.font.pointSize];
 //    [textField setFont: [ICFormatControl getLatoFont:textField.font.pointSize]];
     textField.textColor = [ICFormatHelper getCustomColorBlue];
 //    textField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
@@ -76,12 +76,12 @@
     return NO;
 }
 
-+ (UIFont *)getLatoLightFont:(CGFloat)size
++ (UIFont *)getLightFont:(CGFloat)size
 {
     return [UIFont fontWithName:FONT_NAME_LIGHT size:size];
 }
 
-+ (UIFont *)getLatoBoldFont:(CGFloat)size
++ (UIFont *)getBoldFont:(CGFloat)size
 {
     return [UIFont fontWithName:FONT_NAME_BOLD size:size];
 }
@@ -106,7 +106,7 @@
     CGRect frame = CGRectMake(0, 0, 400, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     [ICFormatHelper formatUILabel:label];
-    label.font = [ICFormatHelper getLatoBoldFont:30];
+    label.font = [ICFormatHelper getBoldFont:30];
     label.text = text;
     navigationItem.titleView = label;
 }

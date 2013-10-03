@@ -45,9 +45,9 @@ int const TAG_FOR_TAX_AMOUNT=1;
     [ICFormatHelper formatUILabel:self.peopleLabel];
     [ICFormatHelper formatUILabel:self.tipLabel];
     [ICFormatHelper formatUILabel:self.grandTotalLabel];
-    self.grandTotalLabel.font = [ICFormatHelper getLatoBoldFont:40];
+    self.grandTotalLabel.font = [ICFormatHelper getBoldFont:40];
     [ICFormatHelper formatUILabel:self.splitAmountLabel];
-    self.splitAmountLabel.font = [ICFormatHelper getLatoBoldFont:40];
+    self.splitAmountLabel.font = [ICFormatHelper getBoldFont:40];
     [ICFormatHelper formatUILabel:self.totalTipLabel];
     [ICFormatHelper formatUILabel:self.totalLabel];
     [ICFormatHelper formatUILabel:self.taxLabel];
@@ -107,7 +107,7 @@ int const TAG_FOR_TAX_AMOUNT=1;
 {
     [self calculate];
 }
-
+// calculte grand total
 - (void)calculate
 {
     double bill = [[ICFormatHelper getFromUITextField:billAmountTextField] doubleValue];

@@ -28,8 +28,8 @@
 // Format UILabel, needs to be called for each UILabel which requires formatting
 + (void)formatUILabel:(UILabel *) label;
 // get the custom font light
-+ (UIFont *)getLatoLightFont: (CGFloat) size;
-+ (UIFont *)getLatoBoldFont: (CGFloat) size;
++ (UIFont *)getLightFont: (CGFloat) size;
++ (UIFont *)getBoldFont: (CGFloat) size;
 // format the given UIButton
 + (void)formatUIButton:(UIButton *)button;
 // get the background pattern

@@ -185,9 +185,9 @@ int const SECTION_SUBTOTAL = 4;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [ICFormatHelper formatUILabel:cell.textLabel];
-    cell.textLabel.font = [ICFormatHelper getLatoLightFont:20];
+    cell.textLabel.font = [ICFormatHelper getLightFont:20];
     [ICFormatHelper formatUILabelAsBold:cell.detailTextLabel];
-    cell.detailTextLabel.font = [ICFormatHelper getLatoBoldFont:20];
+    cell.detailTextLabel.font = [ICFormatHelper getBoldFont:20];
 }
 // create a UILabel, format it and assign it to header
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -214,7 +214,7 @@ int const SECTION_SUBTOTAL = 4;
             break;
     }
     [ICFormatHelper formatUILabel:aLabel];
-    aLabel.font = [ICFormatHelper getLatoLightFont:26];
+    aLabel.font = [ICFormatHelper getLightFont:26];
     aLabel.minimumScaleFactor = 0.5;
     aLabel.numberOfLines = 2;
     return aLabel;

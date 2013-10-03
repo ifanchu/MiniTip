@@ -187,6 +187,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [[self entryTableView] reloadData];
 }
 
+// add a personal entry at double tap
 - (void)doubleTap{
     [self addPersonalEntry:nil];
 }
@@ -214,6 +215,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [self.view endEditing:YES];
 }
 
+// update grand total when tip slider changed
 - (IBAction)tipSliderChanged:(id)sender {
     UISlider *slider = (UISlider *)sender;
     int progressAsInt = lroundf(slider.value);
@@ -222,6 +224,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     [[self tipLabel] setText:newText];
     [self updateGrandTotal];
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -387,15 +390,15 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
         [ICFormatHelper formatUITextField:thisCell.entryForName];
         [ICFormatHelper formatUITextField:thisCell.entryAmountInDollar];
         // setup custom font size
-        thisCell.entryForName.font = [ICFormatHelper getLatoLightFont:36];
-        thisCell.entryAmountInDollar.font = [ICFormatHelper getLatoLightFont:36];
+        thisCell.entryForName.font = [ICFormatHelper getLightFont:36];
+        thisCell.entryAmountInDollar.font = [ICFormatHelper getLightFont:36];
         // setup custom alignment and keybaord type
         thisCell.entryForName.textAlignment = NSTextAlignmentLeft;
         thisCell.entryForName.keyboardType = UIKeyboardTypeNamePhonePad;
     }
 }
 
-// to scroll the table up so that the editing cell is visible
+// to scroll the table up so that the editing cell is always visible
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
@@ -406,7 +409,6 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
     self.entryTableView.contentInset = contentInsets;
     self.entryTableView.scrollIndicatorInsets = contentInsets;
     [self.entryTableView scrollToRowAtIndexPath:self.editingIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
-
 }
 
 // move the table view down to its original place when keyboard is going to hide

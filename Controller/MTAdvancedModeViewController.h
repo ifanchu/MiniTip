@@ -29,7 +29,7 @@
 @property (nonatomic,strong) UIButton *doneButton;
 @property (nonatomic) BOOL isDoneButtonDisplayed;
 
-
+// action for top right calculte button
 - (IBAction)calculateAndShowResultView:(id)sender;
 - (IBAction)addPersonalEntry:(id)sender;
 - (IBAction)addSharedEntry:(id)sender;
