@@ -262,7 +262,7 @@ NSString * const TEXT_FOR_CUSTOM_BUTTON_ON_NUMBER_PAD = @"Done";
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    return indexPath.row == 0 ? NO:YES;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
