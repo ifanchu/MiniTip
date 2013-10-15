@@ -16,3 +16,5 @@
 #define TITLE_TEXT_FOR_DETAIL @"BREAKDOWN"	// title for details page
 #define ACCESSORY_LABEL_TEXT_FOR_BASIC @"Split the bill evenly"
 #define ACCESSORY_LABEL_TEXT_FOR_PARTY @"Specify each dish and shared dishes"
+
+#define APPLE_ID @"582126442"

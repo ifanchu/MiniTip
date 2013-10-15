@@ -11,6 +11,7 @@
 #import "UTViewController.h"
 #import "MTMainViewController.h"
 #import "ICFormatHelper.h"
+#import "Appirater.h"
 
 @implementation UTAppDelegate
 
@@ -26,6 +27,13 @@
     // set window background imge, then set each view background to clear
     self.window.backgroundColor = [ICFormatHelper getBackgroundColor];
     [self.window setFrame:[[UIScreen mainScreen] bounds]];
+    // Appirater settings
+    [Appirater setAppId:APPLE_ID];
+    [Appirater setDaysUntilPrompt:1];
+    [Appirater setUsesUntilPrompt:10];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater appLaunched:YES];
     return YES;
 }
 
@@ -44,6 +52,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
