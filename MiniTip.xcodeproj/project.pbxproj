@@ -13,7 +13,6 @@
 		051AAD551804D65200024C0B /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 051AAD351804D65200024C0B /* AppiraterLocalizable.strings */; };
 		051AAD561804D65200024C0B /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 051AAD371804D65200024C0B /* CHANGELOG.md */; };
 		051AAD571804D65200024C0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 051AAD4A1804D65200024C0B /* README.md */; };
-		051AAD591804D6AE00024C0B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AAD581804D6AE00024C0B /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		051AAD5B1804D6B800024C0B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AAD5A1804D6B800024C0B /* CFNetwork.framework */; };
 		051AAD5D1804D6C300024C0B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AAD5C1804D6C300024C0B /* SystemConfiguration.framework */; };
 		051D8A0D17EA0470004273EE /* ICFormatHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D8A0C17EA0470004273EE /* ICFormatHelper.m */; };
@@ -81,7 +80,6 @@
 		051AAD4F1804D65200024C0B /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		051AAD501804D65200024C0B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		051AAD511804D65200024C0B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
-		051AAD581804D6AE00024C0B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		051AAD5A1804D6B800024C0B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		051AAD5C1804D6C300024C0B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		051D8A0B17EA0470004273EE /* ICFormatHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICFormatHelper.h; path = CustomHelpers/ICFormatHelper.h; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 			files = (
 				051AAD5D1804D6C300024C0B /* SystemConfiguration.framework in Frameworks */,
 				051AAD5B1804D6B800024C0B /* CFNetwork.framework in Frameworks */,
-				051AAD591804D6AE00024C0B /* StoreKit.framework in Frameworks */,
 				058D117F16644E6500C003C3 /* iAd.framework in Frameworks */,
 				058D114F16644D5F00C003C3 /* UIKit.framework in Frameworks */,
 				058D115116644D5F00C003C3 /* Foundation.framework in Frameworks */,
@@ -279,7 +276,6 @@
 			children = (
 				051AAD5C1804D6C300024C0B /* SystemConfiguration.framework */,
 				051AAD5A1804D6B800024C0B /* CFNetwork.framework */,
-				051AAD581804D6AE00024C0B /* StoreKit.framework */,
 				058D117E16644E6500C003C3 /* iAd.framework */,
 				058D114E16644D5F00C003C3 /* UIKit.framework */,
 				058D115016644D5F00C003C3 /* Foundation.framework */,
@@ -365,6 +361,11 @@
 				TargetAttributes = {
 					058D114916644D5F00C003C3 = {
 						DevelopmentTeam = BUW99QC73Z;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

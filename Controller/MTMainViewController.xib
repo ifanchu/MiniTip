@@ -30,7 +30,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="18">
-                    <rect key="frame" x="0.0" y="233.00000000000003" width="320" height="218"/>
+                    <rect key="frame" x="0.0" y="233" width="320" height="218.00000000000003"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
                     <state key="normal" title="PARTY">
