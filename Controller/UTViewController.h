@@ -15,8 +15,10 @@
 }
 @property (weak, nonatomic) IBOutlet UITextField *billAmountTextField;
 @property (weak, nonatomic) IBOutlet UITextField *taxAmountTextField;
-@property (weak, nonatomic) IBOutlet UISlider *peopleSlider;
-@property (weak, nonatomic) IBOutlet UISlider *tipSlider;
+//@property (weak, nonatomic) IBOutlet UISlider *peopleSlider;
+//@property (weak, nonatomic) IBOutlet UISlider *tipSlider;
+@property (weak, nonatomic) IBOutlet UIStepper *peopleStepper;
+@property (weak, nonatomic) IBOutlet UIStepper *tipStepper;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *easySplitSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *grandTotalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *splitAmountLabel;
@@ -31,9 +33,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *totalLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taxLabel;
 
-- (IBAction)peopleSliderChanged:(id)sender;
-- (IBAction)tipSliderChanged:(id)sender;
+//- (IBAction)peopleSliderChanged:(id)sender;
+//- (IBAction)tipSliderChanged:(id)sender;
 - (IBAction)easySplitModeChanged:(id)sender;
+
+- (IBAction)peopleStepperValueChanged:(id)sender;
+- (IBAction)tipStepperValueChanged:(id)sender;
 
 - (void)calculate;
 // TextField Delegate

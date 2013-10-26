@@ -14,7 +14,7 @@
 @end
 
 @implementation UTViewController
-@synthesize billAmountTextField, taxAmountTextField, peopleSlider, tipSlider, easySplitSegmentedControl, grandTotalLabel, splitAmountLabel, peopleLabel, tipLabel, totalTipLabel;
+@synthesize billAmountTextField, taxAmountTextField, easySplitSegmentedControl, grandTotalLabel, splitAmountLabel, peopleLabel, tipLabel, totalTipLabel, tipStepper, peopleStepper;
 
 int const TAG_FOR_BILL_AMOUNT=0;
 int const TAG_FOR_TAX_AMOUNT=1;
@@ -91,6 +91,12 @@ int const TAG_FOR_TAX_AMOUNT=1;
     [[self peopleLabel] setText:newText];
     [self calculate];
 }
+- (IBAction)peopleStepperValueChanged:(id)sender
+{
+    int currentValue = self.peopleStepper.value;
+    self.peopleLabel.text = [[NSString alloc] initWithFormat:@"%d", currentValue];
+    [self calculate];
+}
 
 - (IBAction)tipSliderChanged:(id)sender
 {
@@ -100,6 +106,18 @@ int const TAG_FOR_TAX_AMOUNT=1;
     NSString *newText = [[NSString alloc] initWithFormat:@"%d%@", progressAsInt, @"%"];
     [[self tipLabel] setText:newText];
     [[self easySplitSegmentedControl] setSelectedSegmentIndex:0];
+    [self calculate];
+}
+- (IBAction)tipStepperValueChanged:(id)sender
+{
+    int currentValue = self.tipStepper.value;
+    if (currentValue == 9) {
+        currentValue = 0;
+    }else if (currentValue == 1){
+        currentValue = 10;
+    }
+    self.tipLabel.text = [[NSString alloc] initWithFormat:@"%d%@", currentValue, @"%"];
+    self.tipStepper.value = currentValue;
     [self calculate];
 }
 
@@ -122,9 +140,11 @@ int const TAG_FOR_TAX_AMOUNT=1;
     // 0: no modify, 1: round up, 2: round down
     int selectedEasySplitMode = [[self easySplitSegmentedControl] selectedSegmentIndex];
     // how many ppl
-    int people = (int)([[self peopleSlider] value]+0.5f);
+//    int people = (int)([[self peopleSlider] value]+0.5f);
+    int people = self.peopleStepper.value;
     // tip %
-    double tip = ([[self tipSlider] value]*0.01);
+//    double tip = ([[self tipSlider] value]*0.01);
+    double tip = self.tipStepper.value*0.01;
     // total tip = (bill - tax )* tip
     double fTip = preTax * tip;
     // total paying amount
