@@ -42,7 +42,7 @@
                     </connections>
                 </button>
                 <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="23">
-                    <rect key="frame" x="0.0" y="458" width="320" height="45.000000000000014"/>
+                    <rect key="frame" x="0.0" y="458" width="320" height="45.000000000000007"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                 </adBannerView>
             </subviews>
